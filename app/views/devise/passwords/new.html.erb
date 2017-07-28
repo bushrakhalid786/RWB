@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+  	<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post,class: "sign_up_form" }) do |f| %>
+	  <h2 class="sign_up_title">Forgot your password?</h2>
+	  <%= devise_error_messages! %>
+      <p>Enter your email address we will sent you the password reset link.</p>
+      <div class="form-group">
+        <%= f.email_field :email, autofocus: true,id: "email", class: "form-control input-lg", placeholder: "Email address", tabindex: "4" %>	
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-md-12">
+          <%= f.submit "Send me reset password instructions",class: "btn btn-success btn-block btn-lg" %>
+    	</div>
+      </div>
+    <% end %>	
+  </div>
+</div>

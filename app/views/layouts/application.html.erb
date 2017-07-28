@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'application/base','application/legacy','application/main','application/reports','application/car-report','application/vertical_homepages','application/print','application/main-6b3dc72e37' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application/application', 'data-turbolinks-track': 'reload' %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="robots" content="index, follow" />
+    <meta name="user_metadata_hash" value="" />
+    <link rel="image_src" href="http://regensburgweb.com/images/screenshot.png" />
+    <meta name="application-name" content="Regensburgweb.com" />
+    <title>Regensburg Web Classifieds - Best place to sell a car or house holds Items</title>
+	<meta name="description" content="regensburg web is your leading free classifieds website in Regensburg to buy, sell and find anything. Find a properties, cars, jobs, or items for sale in Regensburg." />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="/m/accounts/register/" />
+  </head>
+  <body id="dbz-body" style="" class="country-uae site-dubai index-p logged-out lang-en">
+    <div id="fb-root" style="overflow:hidden"></div>
+    <div id="gtrans-root" style="overflow:hidden"></div>
+    <div id="page-wrapper">
+      <div id="header">
+		<%= render :partial => "partials/header_menu" %>
+	  </div>
+      <div id="container" class="">
+        <%= yield %>
+      </div>
+    </div>
+    <div class="footer-wrapper-parent">
+      <%= render :partial => "partials/footer" %>
+    </div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert/1.1.3/sweetalert.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.min.css">
+    <div id="dfp-onebyone">
+    </div>             
+  </body>
+</html>

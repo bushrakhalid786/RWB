@@ -1,0 +1,30 @@
+<div id="content-wrapper">
+  <fieldset id="fbsignin-form">
+    <legend>Sign In</legend>
+    <div id="content-col">
+      <h4 class="headline" style="display:none">Already have a <span>Regensburg</span> account? Please <a href='#' id='<%= new_user_session_path %>'>sign in</a>.</h4>
+      <h4 class="headline1" style="display:none">Don't have a <span>Regensburg</span> account? Please <a href='#' id='<%= new_user_registration_path %>'>register</a>. (It's FREE!)</h4>
+      <div class="clear"></div>
+      <ul class="tabs" id="register_tab">
+        <li id="logintab" class="active" >
+          <span class="lefttab"></span>
+          <a href="javascript:void(0)" onclick="sign_in_link()">Sign In</a>
+          <span class="righttab"></span>
+        </li>
+        <li id="registertab">
+          <span class="lefttab"></span>
+          <a href="javascript:void(0)" onclick="sign_up_link()">Register</a>
+          <span class="righttab"></span>
+        </li>
+      </ul>
+      <div class="tab_container">
+        <div id="tab1" class="tab_content active_content">
+          <%= render :partial => "sign_in" %>
+        </div><!-- end #tab1 -->
+        <div id="tab2" class="tab_content">
+          <%= render :partial => "sign_up" %>
+        </div><!-- end #tab2.tab_content -->
+      </div><!-- end .tab_container -->
+    </div><!-- end #content-col -->
+  </fieldset>
+</div>

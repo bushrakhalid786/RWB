@@ -1,0 +1,5 @@
+<% if params[:type] == "auto-accessories-parts" %>
+  <%= render 'auto_accessories_form', advertisement: @advertisement %>
+<% else %>
+  <%= render 'form', advertisement: @advertisement %>
+<% end %>

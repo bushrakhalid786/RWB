@@ -1,0 +1,19 @@
+<div id="content-wrapper">
+  <div class="Homepage">
+    <div class="Hero__container">
+      <h1 class="Hero__title" v-show="currentCategory == '--'">
+        The best place to buy your car and sell your house hold items <br> in Regensburg.
+      </h1>
+      <%= render :partial => "search_box_area",locals: {type: params[:search_type],alias_name: params[:alias_name] || params[:category]} %>
+    </div>
+    <% if params[:action] == "search" %>
+      <%= render  "search_category_page" %>
+    <% else %>  
+      <%= render  "category_page" %>
+    <% end %>
+    <div class="Homepage__card Homepage__marketing">
+    </div>
+    <div class="Category__dump" style="display: none;">
+    </div>
+  </div> 
+</div>

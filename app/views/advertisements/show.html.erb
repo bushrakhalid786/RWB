@@ -1,0 +1,182 @@
+  <div id="content-wrapper">
+    <fieldset id="fbsignin-form">
+      <legend>Post your Ad (Motor)</legend>
+      <div id="content-col">
+        <div class="clear"></div>
+        <div id="tab2" class="tab_content active_content">
+          <div class="required-field">
+            <%= text_field "title",:placeholder => "Ad Title", :maxlength => "20" %>
+            <%= text_field "price",:placeholder => "Price", :maxlength => "20",:pattern =>"^\d+(\.\d{1,2})?$"  %>
+            <%= select_tag "make",options_for_select([["Make",""],["Honda","Honda"],["Toyota","Toyota"],["BMW","BMW"],["Jeep","Jeep"],["Land Rover","Land Rover"]],selected: "Day") %>
+            <%= text_area "description",:placeholder => "Describe your Car",:cols => "40",:rows => "10" %>
+            <%= text_field "kilometers",:placeholder => "Kilometers", :maxlength => "10",:pattern =>"[0-9]*"  %>
+            <% year_arr = [["Year",""]]+((Time.now.year - 25)..(Time.now.year)).to_a.reverse.collect{|aa| [aa,aa]} %>
+            <%= select_tag("year",options_for_select(year_arr,selected: ""),id: "id_year", required: true,include_blank: false,class: "placeholder") %>
+            <% condition_arr = [["Condition",""],["Perfect inside and out","Perfect inside and out"],["No accidents, very few faults","No accidents, very few faults"],["A bit of wear & tear, all repaired","A bit of wear & tear, all repaired"],["Normal wear & tear, a few issues","Normal wear & tear, a few issues"],["Lots of wear & tear to the body","Lots of wear & tear to the body"]] %>
+            <%= select_tag("condition",options_for_select(condition_arr,selected: ""),id: "id_body_condition", required: true,include_blank: false,class: "placeholder") %>
+            <%= text_field "phone_number",:placeholder => "Phone number", :maxlength => "20",:pattern =>"\+?[0-9]*",:id=> "id_phone_number"  %>
+            <label for="id_body_type" >
+              Body Type:
+            </label>
+            <% body_type_arr = [["Body Type",""],["Coupe","Coupe"],["Crossover","Crossover"],["Hard Top Convertible","Hard Top Convertible"],["Hatchback","Hatchback"],["Pick Up Truck","Pick Up Truck"],["Sedan","Sedan"],["Soft Top Convertible","Soft Top Convertible"],["Sports Car","Sports Car"],["SUV","SUV"],["Utility Truck","Utility Truck"],["Van","Van"],["Wagon","Wagon"],["Other","Other"]] %>
+            <%= select_tag("body_type",options_for_select(body_type_arr,selected: ""),id: "id_body_type", required: true,include_blank: false) %>
+          </div>
+          <div class="required-field">
+            <label for="id_color" >
+              Color:
+            </label>
+            <%= select_tag("color",options_for_select([["Color",""],["Black","Black"],["Blue","Blue"],["Brown","Brown"],["Burgundy","Burgundy"],["Gold","Gold"],["Grey","Grey"],["Orange","Orange"],["Green","Green"],["Purple","Purple"],["Red","Red"],["Silver","Silver"],["Tan","Tan"],["Teal","Teal"],["White","White"],["Yellow","Yellow"],["Other Color","Other Color"]],selected: ""),id: "id_body_type", required: true,include_blank: false) %>
+          </div>
+          <div class="required-field">
+            <label for="id_transmission_type" >
+              Transmission Type:
+            </label>
+            <%= select_tag("transition_type",options_for_select([["Transmission Type",""],["Manual Transmission","Manual Transmission"],["Automatic Transmission","Automatic Transmission"]],selected: ""),id: "id_transmission_type", required: true,include_blank: false) %>
+          </div>
+          <div class="required-field">
+            <label for="id_regional_specs" >                      
+              Regional Specs:
+            </label>
+            <%= select_tag("regional_specs",options_for_select([["Regional Specs",""],["European Specs","European Specs"],["GCC Specs","GCC Specs"],["Japanese Specs","Japanese Specs"],["North American Specs","North American Specs"],["Other","Other"]],selected: ""),id: "id_regional_specs", required: true,include_blank: false) %>
+          </div>
+          <div class="required-field">
+            <label for="id_no._of_cylinders" >
+              No. of Cylinders:
+            </label>
+            <%= select_tag("no_of_cylinders",options_for_select([["No. of Cylinders",""],["3","3"],["4","4"],["5","5"],["6","6"],["8","8"],["10","10"],["12","12"],["Unknown","Unknown"]],selected: ""),id: "id_no._of_cylinders", required: true,include_blank: false) %>
+          </div>
+          <div class="required-field">
+            <label for="id_doors" >
+              Doors:
+            </label>
+            <%= select_tag("doors",options_for_select([["Doors",""],["2 door","2 door"],["3 door","3 door"],["4 door","4 door"],["5+ doors","5+ doors"]],selected: ""),id: "id_doors", required: true,include_blank: false) %>
+          </div>
+          <div class="required-field">
+            <label for="id_horsepower" >
+              Horsepower:
+            </label>
+            <%= select_tag("horse_power",options_for_select([["Horsepower",""],["Less than 150 HP","Less than 150 HP"],["150 - 200 HP","150 - 200 HP"],["200 - 300 HP","200 - 300 HP"],["300 - 400 HP","300 - 400 HP"],["400 - 500 HP","400 - 500 HP"],["500 - 600 HP","500 - 600 HP"],["600 - 700 HP"],["700 - 800 HP","700 - 800 HP"],["800 - 900 HP","800 - 900 HP"],["900+ HP","900+ HP"],["Unknown","Unknown"]],selected: ""),id: "id_horsepower", required: true,include_blank: false) %>
+          </div>
+          <div class="required-field">
+            <label for="id_warranty" >
+              Warranty:
+            </label>
+            <%= select_tag("warrenty",options_for_select([["Warranty",""],["Yes","Yes"],["No","No"],["Does not apply","Does not apply"]],selected: ""),id: "id_warranty", required: true,include_blank: false) %>
+          </div>
+          <div class="required-field">
+            <label for="id_fuel_type" >
+              Fuel Type:
+            </label>
+            <%= select_tag("fuel_type",options_for_select([["Fuel Type",""],["Gasoline","Gasoline"],["Diesel","Diesel"],["Hybrid","Hybrid"],["Electric","Electric"]],selected: ""),id: "id_fuel_type", required: true,include_blank: false) %>
+          </div>
+          <div class="extras">
+            <label for="id_extras" >
+              <h4>    Extras: </h4>
+            </label>
+            <ul id="id_extras">
+              <% extra_array = ["Air Conditioning","Alarm/Anti-Theft System","AM/FM Radio","Aux Audio In","Bluetooth System","Body Kit","Brush Guard","Cassette Player","CD Player","Climate Control","Cooled Seats","DVD Player","Fog Lights","Heat","Heated Seats","Keyless Entry","Keyless Start","Leather Seats","Moonroof","Navigation System","Off-Road Kit","Off-Road Tyres","Parking Sensors","Performance Tyres","Power Locks","Power Mirrors","Power Seats","Power Sunroof","Power Windows","Premium Lights","Premium Paint","Premium Sound System","Premium Wheels/Rims","Racing Seats","Rear View Camera","Roof Rack","Satellite Radio","Spoiler","Sunroof","VHS Player","Winch"] %>
+              <% extra_array.each_with_index do |extra,index| %>
+                <li>
+                  <label for="id_extras_<%= index %>">
+                    <%= check_box_tag "extras[]",id: "id_extras_#{index }",checked: false %><%= extra %>
+                  </label>  
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="technical-features ">
+            <label for="id_technical_features" >
+              <br>
+              <h4> Technical Features: </h4>
+            </label>
+            <ul id="id_technical_features">
+              <% extra_array = ["4 Wheel Drive","All Wheel Drive","All Wheel Steering","Anti-Lock Brakes/ABS","Cruise Control","Dual Exhaust","Front Airbags","Front Wheel Drive","N2O System","Power Steering","Rear Wheel Drive","Side Airbags","Tiptronic Gears"] %>
+              <% extra_array.each_with_index do |extra,index| %>
+                <li>
+                  <label for="id_technical_features_<%= index %>">
+                    <%= check_box_tag "technical_features[]",id: "id_technical_features_#{index}",checked: false %><%= extra %>
+                  </label>  
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="photo-uploader-fallback">
+            <h2>Add up to 10 photos</h2>
+            <div class="">
+              <label for="id_photo0" >
+                Main photo:
+              </label>
+              <input id="id_photo0" name="photo0" type="file" />
+            </div>
+            <div class="">
+              <label for="id_photo1" >
+                Alternative Photo:
+              </label>
+              <input id="id_photo1" name="photo1" type="file" />
+            </div>
+            <div class="">
+              <label for="id_photo2" >
+                Alternative Photo:
+              </label>
+              <input id="id_photo2" name="photo2" type="file" />
+            </div>
+            <div class="">
+              <label for="id_photo3" >
+                Alternative Photo:
+              </label>
+              <input id="id_photo3" name="photo3" type="file" />
+            </div>
+            <div class="">
+              <label for="id_photo4" >
+                Alternative Photo:
+              </label>
+              <input id="id_photo4" name="photo4" type="file" />
+            </div>
+            <div class="">
+              <label for="id_photo5" >
+                Alternative Photo:
+              </label>
+              <input id="id_photo5" name="photo5" type="file" />
+            </div>
+            <div class="">
+              <label for="id_photo6" >
+                Alternative Photo:
+              </label>
+              <input id="id_photo6" name="photo6" type="file" />
+            </div>
+            <div class="">
+              <label for="id_photo7" >
+                Alternative Photo:
+              </label>
+              <input id="id_photo7" name="photo7" type="file" />
+            </div>
+            <div class="">
+              <label for="id_photo8" >
+                Alternative Photo:
+              </label>
+              <input id="id_photo8" name="photo8" type="file" />
+            </div>
+            <div class="">
+              <label for="id_photo9" >
+                Alternative Photo:
+              </label>
+              <input id="id_photo9" name="photo9" type="file" />  
+            </div>
+          </div>
+          <div class="">
+            <br>
+            <label for="id_neighbourhood" >
+              <h4>   Neighbourhood: </h4>
+            </label>
+            <%= select_tag("locate_your_item",options_for_select([["Locate your car",""],["Location 1","Location 1"],["Location 2","Location 2"],["Location 3","Location 3"],["Location 4","Location 4"],["Location 5","Location 5"]],selected: ""),id: "id_neighbourhood", required: true,include_blank: false) %>
+            <%= text_field "gps_coordinate",:placeholder => "GPS Coordinates", :maxlength => "20",:pattern =>"\+?[0-9]*",:id=> "id_phone_number"  %>
+          </div>
+        </div>
+        <div id="uploaded-images" style="display: none;">
+        </div>
+      </div><!-- end #tab2.tab_content -->
+      <p>
+      </p>
+      <p>&nbsp; </p>
+    </fieldset>
+  </div>

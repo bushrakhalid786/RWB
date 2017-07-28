@@ -1,0 +1,71 @@
+<div class="header-top-bar">
+  <div class="header-top-bar__left">
+    <div id="logo">
+      <a href="/">
+        <%= image_tag "regensburg-logo.png",alt: "regensburg.com" %>
+      </a>
+    </div>
+  </div>
+  <div class="header-top-bar__right">
+    <div id="parent-user-control">
+      <ul id="user-controls">
+        <li class="fbsignin"></li>
+        <% if signed_in? %>
+          <%= current_user.first_name + " " + current_user.last_name %> | 
+          <%= link_to 'Logout', destroy_user_session_path , :method => 'delete'%>
+        <% else %>
+          <li><%= link_to 'Sign In', new_user_session_path %></li>
+          <li><%= link_to 'Register', new_user_registration_path %></li>
+        <% end %>  
+      </ul><!-- end user-controls -->
+    </div>
+    <div id="callouts">
+      <ul>
+        <li id="place-an-ad">
+          <a id="place_an_ad_callout_en" href="<%= choose_category_path %>" class="awesome red">
+            <i class="material-icons">add</i> Place Your Ad
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div id="nav">
+  <ul class="nav-container">
+    <li class="nav-container-main">
+      <ul id="navbar-id" class="navbar">
+        <li class="parent more" id="nav-motors">
+          <a href='<%= show_category_page_path(@motor_category.alias_name) %>' title=""><span class="more"><%= @motor_category.name %></span></a>
+          <ul id="nav-categories-list-container" class='navbar-inner '>
+            <li class='nav-inner-content'>
+              <ul class='nav-col-list'>
+                <% @motor_category.children.each do |children| %>
+                  <li>
+                    <a href='<%= show_category_page_with_children_path(@motor_category.alias_name,children.alias_name) %>'><%= children.name %>
+                    <strong><%= Advertisement.by_categories(children.id).count %></strong></a>
+                  </li>
+                <% end %>  
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="parent more" id="nav-classified">
+          <a href='<%= show_category_page_path(@classified_category.alias_name) %>' title=""><span class="more"><%= @classified_category.name %></span></a>
+          <ul id="nav-categories-list-container" class='navbar-inner '>
+            <li class='nav-inner-content'>
+              <ul class='nav-col-list'>
+                <% @classified_category.children.each do |children| %>
+                  <li>
+                    <a href='<%= show_category_page_with_children_path(@classified_category.alias_name,children.alias_name) %>'><%= children.name %>
+                    <strong><%= Advertisement.by_categories(children.id).count %></strong>
+                    </a>
+                  </li>
+                <% end %>  
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div><!-- end nav-->

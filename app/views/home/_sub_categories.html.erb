@@ -1,0 +1,5 @@
+<% categories_count = category.children.count %>
+<% category.children.each_with_index do |child,index| %>
+  <%= link_to "<strong>#{child.name}</strong>".html_safe,new_advertisement_path(id: child.id) %>
+  <%= index == (categories_count-1 ) ? "" : "|" %>  
+<% end %>

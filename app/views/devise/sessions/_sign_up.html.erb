@@ -1,0 +1,131 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), id: "signup-form") do |f| %>
+  <%= devise_error_messages! %>
+  <div class="form-row no-bot-border">
+  </div>
+  <div class="form-row no-bot-border">
+    <h4>Register for Free</h4>
+    <p class="note">Note: All fields are mandatory</p>
+  </div>
+  <div class="clear"></div>
+  <div class="form-row" hint="username@domain.com">
+    <label for="id_email">Email Address</label>
+    <%= f.email_field :email, autofocus: true,id: "id_email", maxlength: "75", required: true %>
+    <div class="clear"></div>
+  </div>
+  <div class="form-row" hint="username@domain.com (confirm)">
+    <label for="id_email">Confirm Email</label>
+    <%= f.email_field :email_confirmation, autocomplete: "off",id: "id_email2", maxlength: "75", required: true %>
+    <div class="clear"></div>
+  </div>
+  <div class="form-row">
+    <label for="id_password1">Password</label>
+    <div class="multiple">
+      <div class="multiple_password1">
+        <%= f.password_field :password, autocomplete: "off",id: "id_password1", minlength: "7", required: true %>
+      </div>
+      <div class="multiple_password2">
+        <%= f.password_field :password_confirmation, autocomplete: "off", id: "id_password2", required: true %>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="password-widget password-widget-c">
+      <div class="password-warn">
+        <div class="">
+          <span class="password-strength-label">Password Strength:</span>
+          <span class="password-strength-text password-strength-weak">Weak</span>
+          <span class="password-strength-text password-strength-medium hidden">Medium</span>
+          <span class="password-strength-text password-strength-strong hidden">Strong</span>
+        </div>
+        <ul class="tips">
+          <li class="tip tip-lowcase">Have one lower case letter</li>
+          <li class="tip tip-uppcase">Have one capital letter</li>
+          <li class="tip tip-num">Have atleast one number</li>
+          <li class="tip tip-chr7">Be atleast 7 characters long</li>
+          <li class="tip tip-compass">Not a common password</li>
+          <li class="tip tip-repchr">Not 2 consequtive identical characters</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="form-row" hint="Please enter your real name.">
+    <label for="id_first_name">First Name</label>
+    <%= f.text_field :first_name, autocomplete: "off", id: "id_first_name", required: true %>
+    <div class="clear"></div>
+  </div>
+  <div class="form-row" hint="Your last name will be kept private.">
+    <label for="id_last_name">Last Name</label>
+    <%= f.text_field :last_name, autocomplete: "off", id: "id_last_name", required: true %>
+    <div class="clear"></div>
+  </div>
+  <div class="form-row">
+    <label for="id_gender">My Mother Calls Me</label>
+    <%= f.select("gender",options_for_select([["- Select One -",""],["Male","male"],["Female","female"]],selected: "- Select One -"),{},id: "id_gender", required: true,include_blank: false) %>
+    <div class="clear"></div>
+  </div>
+  <div class="form-row">
+    <label for="id_dob">The world became a better place on (d.o.b)</label>
+    <div id="bday-form">
+      <span>
+        <% day_array = [["Day",""],["01","01"],["02","02"],["03","03"],["04","04"],["05","05"],["06","06"],["07","07"],["08","08"],["09","09"],["10","10"],["11","11"],["12","12"],["13","13"],["14","14"],["15","15"],["16","16"],["17","17"],["18","18"],["19","19"],["20","20"],["21","21"],["22","22"],["23","23"],["24","24"],["25","25"],["26","26"],["27","27"],["28","28"],["29","29"],["30","30"],["31","31"]] %>
+        <%= f.select("dob_day",options_for_select(day_array,selected: "Day"),{},id: "id_dob_day",required: true) %>
+      </span>
+      <span>
+        <% month_array = [["Month",""],["January","1"],["February","2"],["March","3"],["April","4"],["May","5"],["June","6"],["July","7"],["August","8"],["September","9"],["October","10"],["November","11"],["December","12"]] %>
+        <%= f.select("dob_month",options_for_select(month_array,selected: "Month"),{},id: "id_dob_month",required: true) %>
+      </span>
+      <span>
+        <% year_array = [["Year",""]]+((Time.now.strftime("%Y").to_i - 96)..Time.now.strftime("%Y").to_i).to_a.reverse.collect{|i| [i,i]} %>
+        <%= f.select("dob_year",options_for_select(year_array,selected: "Year"),{},id: "id_dob_year",required: true) %>
+      </span>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="form-row">
+    <label for="id_nationality">My Passport tells me I am from</label>
+    <% country_array = [["- Select One -",""]] + Country.all.collect{|c| [c.name,c.id]} %>
+    <%= f.select("country_id",options_for_select(country_array,selected: "- Select One -"),{},id: "id_nationality",style: "width: 207px",required: true) %>
+    <div class="clear"></div>
+  </div>
+  <div class="form-row">
+    <label for="id_role">My friends call me often, but my company calls me</label>
+    <% designation_array = [["- Select One -",""],["Student/Intern","ST"],["Junior","EP"],["Mid-level","PO"],["Senior","SR"],["Manager","MM"],["Executive/Director","SM"]] %>
+    <%= f.select("designation",options_for_select(designation_array,selected: "- Select One -"),{},id: "id_role",style: "width: 207px",required: true) %>
+    <div class="clear"></div>
+  </div>
+  <div class="form-row">
+    <label for="id_education">My highest academic achievement is</label>
+    <% education_array = [["- Select One -",""],["N/A","0"],["High-School / Secondary","1"],["Bachelors Degree","2"],["Masters Degree","3"],["PhD","4"]] %>
+    <%= f.select("education",options_for_select(education_array,selected: "- Select One -"),{},id: "id_education",required: true) %>
+    <div class="clear"></div>
+  </div>
+  <div class="cb-form-row">
+    <label for="id_third_party_emails">
+      <%= f.check_box :allow_third_party_emails,id: "id_third_party_emails",checked: true %>&nbsp;Allow Regensburg to send me occasional updates about the site.
+    </label>
+    <br />
+    <label for="id_dubizzle_email_updates">
+      <%= f.check_box :allow_dubizzle_email_updates,id: "id_dubizzle_email_updates",checked: true %>&nbsp;Send me amazing offers and bargains from our advertising partners.
+    </label>
+    <div class="clear"></div>
+  </div>
+  <div class="fbregister-button-block">
+    <p>By clicking on Register, you agree to the <a href="/terms/" target="_blank" class="redbold">Regensburg Terms and Conditions</a> and the <a href="/privacy/" target="_blank" class="redbold">Regensburg Privacy Policy</a>.</p>
+    <%= f.submit "Register", class: "red awesome fbregister-button" %>
+    <div class="clear"></div>
+  </div>
+<% end %>  
+<script type="text/javascript">
+  var password = document.getElementById("id_password1")
+  , confirm_password = document.getElementById("id_password2");
+
+  function validatePassword(){
+    if(password.value != confirm_password.value) {
+      confirm_password.setCustomValidity("Passwords Don't Match");
+    } else {
+      confirm_password.setCustomValidity('');
+    }
+  }
+
+  password.onchange = validatePassword;
+  confirm_password.onkeyup = validatePassword;
+</script>

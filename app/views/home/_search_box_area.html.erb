@@ -1,0 +1,67 @@
+<div class="Searchbox__container" style="margin-top: 5px !important;">
+  <div class="Searchbox__top cf">
+    <div class="Searchbox__square" v-bind:style="{cursor: currentCategory != '--' ? 'pointer' : 'initial'}">
+      <div v-if="currentCategory == '--'" style="margin-top: 24px;">Motor:
+      </div>
+      <div v-cloak v-else @click="changeSearchCategory('--')">
+        <br> Regensburg Web
+      </div>
+    </div>
+    <div class="Searchbox__square">
+      <div class="Searchbox__category__icon">
+        <a href="<%= show_category_page_path(@motor_category.alias_name) %>"><i class="material-icons md-36" style="color:#FFF;">directions_car</i></a>  
+      </div>
+      <%= @motor_category.name %>
+    </div>
+    <div class="Searchbox__square">
+      <div class="Searchbox__category__icon">
+        <a href="<%= show_category_page_path(@classified_category.alias_name) %>"><i class="material-icons md-36" style="color:#FFF;">store</i></a>
+      </div>
+      <%= @classified_category.name %>
+    </div>
+    <div class="Searchbox__square">
+      <div class="Searchbox__category__icon">
+        <i class="material-icons md-36">hourglass empty</i>
+      </div>
+    </div>
+    <div class="Searchbox__square">
+      <div class="Searchbox__category__icon">
+        <i class="material-icons md-36">hourglass empty</i>
+      </div>
+    </div>
+    <div class="Searchbox__square">
+      <div class="Searchbox__category__icon">
+        <i class="material-icons md-36">hourglass empty</i>
+      </div>
+    </div>
+    <div class="Searchbox__square">
+      <div class="Searchbox__category__icon">
+        <i class="material-icons md-36">hourglass empty</i>
+      </div>
+    </div>
+  </div>
+  <%= form_tag ("/search?category=#{alias_name}") do %>
+  <div class="Searchbox__bottom">
+    <% if alias_name == "motors" %>
+      <%= select_tag  "search[category_id]",options_for_select(@motor_category.children.pluck("name,id")),prompt: " Select Category",class: "Searchbox__keyword__input select_class" %>
+      <%= select_tag  "search[make]",options_for_select([["Make",""],["Honda","Honda"],["Toyota","Toyota"],["BMW","BMW"],["Jeep","Jeep"],["Land Rover","Land Rover"]]),prompt: "Select Make",class: "Searchbox__keyword__input select_class" %>
+      <%= select_tag  "search[year]",options_for_select(((Time.now.year - 25)..(Time.now.year)).to_a.reverse.collect{|aa| [aa,aa]}),prompt: "Select Year",class: "Searchbox__keyword__input small_select_class" %>
+      <br><br>
+    <% end %>
+    <%= text_field_tag "search[title]","",class: "Searchbox__keyword__input",placeholder: "Enter keywords" %>
+    <%= hidden_field_tag "search[category_id]", @category.id if @category.present?%>
+    <input type="submit" class="Searchbox__search__button" value="Search">
+  </div>
+  <% end %>
+</div>
+<style type="text/css">
+  .select_class{
+    width: 285px; 
+    height: 25px;
+  }
+
+  .small_select_class{
+    width: 100px; 
+    height: 25px;
+  }
+</style>

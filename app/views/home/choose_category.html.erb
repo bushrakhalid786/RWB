@@ -1,0 +1,49 @@
+<div id="page-wrapper">
+  <div id="help-slider" style="display:none"></div>
+  <div id="container" class="">
+    <div id="content-wrapper">
+      <fieldset id="fbsignin-form">
+	    <legend>Post Your Ad</legend>
+        <div id="content-col" class="category-tab">
+          <div class="clear"></div>
+		      <ul class="tabs">
+      			<li id="motor_tab" class="active">
+	       		  <span class="lefttab"></span>
+              <a href="javascript:void(0)" onclick="sign_in_link()">
+                <%= @motor_category.name %>
+              </a>
+			        <span class="righttab"></span>
+			      </li>
+    		    <li id="classified_tab">
+		      	  <span class="lefttab"></span>
+              <a href="javascript:void(0)" onclick="sign_up_link()">
+                <%= @classified_category.name %>
+              </a>
+    		      <span class="righttab"></span>
+		        </li>
+	        </ul>
+    		  <div class="tab_container">
+		        <div id="tab1" class="tab_content active_content">
+              <%= render :partial => "home/sub_categories",:locals => {:category => @motor_category} %>
+            </div><!-- end #tab1 -->
+            <div id="tab2" class="tab_content">
+              <%= render :partial => "home/sub_categories",:locals => {:category => @classified_category} %>
+      			</div><!-- end #tab2.tab_content -->
+      	  </div><!-- end .tab_container -->
+  	    </div><!-- end #content-col -->
+      </fieldset>
+      <div style="display:none;">
+    	  <div style="display:inline;">
+		    </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".category-tab li").click(function(){
+      $(".category-tab li").removeClass("active")
+      $(this).addClass("active")
+    })
+  })
+</script>

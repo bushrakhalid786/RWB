@@ -1,0 +1,47 @@
+<%= form_for(resource, as: resource_name, url: session_path(resource_name),id: "login-form",style: "clear:both" ) do |f| %>
+  <div id="right-col">
+    <div id="register-head">
+    </div>
+    <div id="signin-form">
+      <span class="form-row">
+        <% if flash[:notice].present? %>
+          <p><%= flash[:notice] %></p>
+        <% end %>
+        <% if flash[:alert].present? %>
+          <p><%= flash[:alert] %></p>
+        <% end %>
+      </span>
+      <h4>Sign in with Regensburg</h4>
+      <div class="form-row" hint="username@domain.com">
+        <label for="id_username">Email address</label>
+        <%= f.email_field :email, autofocus: true,id: "id_username", class: "textbox required email",value: "",tabindex: "1", required: true  %>
+        <div class="clear"></div>
+      </div>
+      <div class="form-row ">
+        <label for="id_password">Password
+          <span class="forgotpassword">
+            <%= link_to "Forgot Password?", new_password_path(resource_name) %>  
+          </span>
+        </label>
+        <%= f.password_field :password, autocomplete: "off", id: "id_password", minlength: "5", class: "textbox required",tabindex: "2", required: true %>
+        <div class="clear"></div>
+      </div>
+      <div class="fbsignin-button-block">
+        <%= f.submit "Sign In",class: "red awesome fbsignin-button" %>
+          <p>Don't have an account? <a href="#"  id="register-link1">Register</a></p>
+        <div class="clear"></div>
+      </div>
+    </div><!-- end #signin-form -->
+  </div><!-- end #right-col -->
+<% end %>
+<script type="text/javascript">
+  $(document).ready(function(){
+  $("#register-link1").click(function(){
+      $("#registertab").addClass("active")
+      $("#logintab").removeClass("active")
+      $("#tab1").hide()
+      $("#tab2").show()
+      return false;
+    })
+  })
+</script>
