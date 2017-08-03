@@ -43,9 +43,9 @@
   <%= form_tag ("/search?category=#{alias_name}") do %>
   <div class="Searchbox__bottom">
     <% if alias_name == "motors" %>
-      <%= select_tag  "search[category_id]",options_for_select(@motor_category.children.pluck("name,id")),prompt: " Select Category",class: "Searchbox__keyword__input select_class" %>
-      <%= select_tag  "search[make]",options_for_select([["Make",""],["Honda","Honda"],["Toyota","Toyota"],["BMW","BMW"],["Jeep","Jeep"],["Land Rover","Land Rover"]]),prompt: "Select Make",class: "Searchbox__keyword__input select_class" %>
-      <%= select_tag  "search[year]",options_for_select(((Time.now.year - 25)..(Time.now.year)).to_a.reverse.collect{|aa| [aa,aa]}),prompt: "Select Year",class: "Searchbox__keyword__input small_select_class" %>
+      <%= select_tag  "search[category_id]",options_for_select(@motor_category.children.pluck("name,id")),prompt: " Select Category",class: "Searchbox__keyword__input1 select_class" %>
+      <%= select_tag  "search[make]",options_for_select([["Make",""],["Honda","Honda"],["Toyota","Toyota"],["BMW","BMW"],["Jeep","Jeep"],["Land Rover","Land Rover"]]),prompt: "Select Make",class: "Searchbox__keyword__input1 select_class" %>
+      <%= select_tag  "search[year]",options_for_select(((Time.now.year - 25)..(Time.now.year)).to_a.reverse.collect{|aa| [aa,aa]}),prompt: "Select Year",class: "Searchbox__keyword__input1 small_select_class" %>
       <br><br>
     <% end %>
     <%= text_field_tag "search[title]","",class: "Searchbox__keyword__input",placeholder: "Enter keywords" %>

@@ -27,10 +27,13 @@ class HomeController < ApplicationController
   def search
     if params[:search].present?
       search_params = params[:search].delete_if{|k,v| v.blank?}
-      advertiments = Advertisement.search do
-                      fulltext(search_params["title"])
-                     end
-      @all_ads = advertiments.results.paginate(page: params[:page],per_page: 1)
+      advertisements = Advertisement.search do
+                         fulltext(search_params["title"]) if search_params[:title].present?
+                         with(:category_id, search_params[:category_id].to_i) if search_params[:category_id].present?
+                         with(:make, search_params[:make]) if search_params[:make].present?
+                         with(:year, search_params[:year]) if search_params[:year].present?
+                       end
+      @all_ads = advertisements.results.paginate(page: params[:page],per_page: 1)
     end
     render "show_category_page"
   end 

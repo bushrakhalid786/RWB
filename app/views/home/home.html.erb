@@ -48,7 +48,7 @@
         </div>
         <%= form_tag ("/search") do %>
           <div class="Searchbox__bottom">
-            <%= text_field_tag "search[title]","",class: "Searchbox__keyword__input",placeholder: "Enter keywords" %>
+            <%= text_field_tag "search[title]","",class: "Searchbox__keyword__input1",placeholder: "Enter keywords" %>
             <%= hidden_field_tag "search_type" ,"normal_search"%>
             <input type="submit" class=" Searchbox__search__button" click="formSubmit" value="Search">
           </div>
