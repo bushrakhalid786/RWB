@@ -44,9 +44,9 @@
             </div>
           </div>
         </div>
-        <%= form_tag ("/search") do %>
+        <%= form_tag("/search",method: :get) do %>
           <div class="Searchbox__bottom">
-            <%= text_field_tag "search[title]","",class: "Searchbox__keyword__input1",placeholder: "Enter keywords" %>
+            <%= text_field_tag "search[title]","",class: "Searchbox__keyword__input1",placeholder: "Enter keywords",:value => (params[:search] and params[:search][:title]) %>
             <%= hidden_field_tag "search_type" ,"normal_search"%>
             <input type="submit" class=" Searchbox__search__button" click="formSubmit" value="Search">
           </div>
@@ -64,12 +64,6 @@
             <div class="Trending__tag"><%= latest_ad.title %></div>
           </a>
         <% end %>
-        <a href="/search/?keywords=%23lenovo" class="Trending__block">
-          <div class="Trending__icon">
-            <!-- <img src="/static/home/img/icons/trending-icons/laptop-icon.png"> -->
-          </div>
-          <div class="Trending__tag">#lenovo</div>
-        </a>
       </div>
     </div>
     <div class="Homepage__card">
