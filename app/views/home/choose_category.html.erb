@@ -7,28 +7,22 @@
         <div id="content-col" class="category-tab">
           <div class="clear"></div>
 		      <ul class="tabs">
-      			<li id="motor_tab" class="active">
-	       		  <span class="lefttab"></span>
-              <a href="javascript:void(0)" onclick="sign_in_link()">
-                <%= @motor_category.name %>
-              </a>
-			        <span class="righttab"></span>
-			      </li>
-    		    <li id="classified_tab">
-		      	  <span class="lefttab"></span>
-              <a href="javascript:void(0)" onclick="sign_up_link()">
-                <%= @classified_category.name %>
-              </a>
-    		      <span class="righttab"></span>
-		        </li>
+            <% @categories.each_with_index do |category,index| %>
+        			<li id="<%= index %>_tab" class="<%= index == 0 ? 'active' : '' %>">
+  	       		  <span class="lefttab"></span>
+                <a href="javascript:void(0)" id = "<%= index%>">
+                  <%= category.name %>
+                </a>
+  			        <span class="righttab"></span>
+  			      </li>
+    		    <% end %>
 	        </ul>
     		  <div class="tab_container">
-		        <div id="tab1" class="tab_content active_content">
-              <%= render :partial => "home/sub_categories",:locals => {:category => @motor_category} %>
-            </div><!-- end #tab1 -->
-            <div id="tab2" class="tab_content">
-              <%= render :partial => "home/sub_categories",:locals => {:category => @classified_category} %>
-      			</div><!-- end #tab2.tab_content -->
+            <% @categories.each_with_index do |category,index| %>
+  		        <div id="tab<%= index %>" class="tab_content <%= index == 0 ? 'active_content' : '' %>">
+                <%= render :partial => "home/sub_categories",:locals => {:category => category} %>
+              </div><!-- end #tab1 -->
+            <% end %>  
       	  </div><!-- end .tab_container -->
   	    </div><!-- end #content-col -->
       </fieldset>
@@ -44,6 +38,9 @@
     $(".category-tab li").click(function(){
       $(".category-tab li").removeClass("active")
       $(this).addClass("active")
+      div = "#tab"+ $(this).attr("id").split("_")[0]
+      $(".tab_container div").hide()
+      $(div).show()
     })
   })
 </script>

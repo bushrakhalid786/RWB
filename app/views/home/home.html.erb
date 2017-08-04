@@ -13,18 +13,16 @@
 		      All of <br> Regensburg Web
             </div>
           </div>
-          <div class="Searchbox__square">
-            <div class="Searchbox__category__icon">
-              <a href="<%= show_category_page_path(@motor_category.alias_name) %>"><i class="material-icons md-36" style="color:#FFF;">directions_car</i></a>  
+          <% @categories.each do |category| %>
+            <div class="Searchbox__square">
+              <div class="Searchbox__category__icon">
+                <a href="<%= show_category_page_path(category.alias_name) %>">
+                  <i class="material-icons md-36" style="color:#FFF;">directions_car</i>
+                </a>  
+              </div>
+              <%= category.name %>
             </div>
-            <%= @motor_category.name %>
-          </div>
-          <div class="Searchbox__square">
-            <div class="Searchbox__category__icon">
-              <a href="<%= show_category_page_path(@classified_category.alias_name) %>"><i class="material-icons md-36" style="color:#FFF;">store</i></a>
-            </div>
-            <%= @classified_category.name %>
-          </div>
+          <% end %>
           <div class="Searchbox__square">
             <div class="Searchbox__category__icon">
               <i class="material-icons md-36">hourglass empty</i>
@@ -56,38 +54,16 @@
       </div>
     </div>
     <div class="Homepage__card">
-      <h2 class="Homepage__card__title"><span class="red">Trending</span> on Regensburg</h2>
+      <h2 class="Homepage__card__title"><span class="red">Latest Ad</span> on Regensburg</h2>
       <div class="Trending__container cf">
-        <a href="/search/?keywords=%23starwars" class="Trending__block">
-          <div class="Trending__icon">
-            <!-- <img src="/static/home/img/icons/trending-icons/starwars-icon.png"> -->
-          </div>
-          <div class="Trending__tag">#starwars</div>
-        </a>
-        <a href="/search/?keywords=%23philips" class="Trending__block">
-          <div class="Trending__icon">
-            <!-- <img src="/static/home/img/icons/trending-icons/home-appliances-icon.png"> -->
-          </div>
-          <div class="Trending__tag">#philips</div>
-        </a>
-        <a href="/search/?keywords=%23reebok" class="Trending__block">
-          <div class="Trending__icon">
-            <!-- <img src="/static/home/img/icons/trending-icons/shoes-icon.png"> -->
-          </div>
-          <div class="Trending__tag">#reebok</div>
-        </a>
-        <a href="/search/?keywords=%23iphone" class="Trending__block">
-          <div class="Trending__icon">
-            <!-- <img src="/static/home/img/icons/trending-icons/iphone-icon.png"> -->
-          </div>
-          <div class="Trending__tag">#iphone</div>
-        </a>
-        <a href="/search/?keywords=%23canon" class="Trending__block">
-          <div class="Trending__icon">
-            <!-- <img src="/static/home/img/icons/trending-icons/camera-icon.png"> -->
-          </div>
-          <div class="Trending__tag">#canon</div>
-        </a>
+        <% @latest_ad.each do |latest_ad| %>
+          <a href="/search/?keywords=%23starwars" class="Trending__block">
+            <div class="Trending__icon">
+              <%= image_tag latest_ad.main_image.avatar.url(:thumb),:alt => "No Image" ,:style => "width: 28%" %>
+            </div>
+            <div class="Trending__tag"><%= latest_ad.title %></div>
+          </a>
+        <% end %>
         <a href="/search/?keywords=%23lenovo" class="Trending__block">
           <div class="Trending__icon">
             <!-- <img src="/static/home/img/icons/trending-icons/laptop-icon.png"> -->
@@ -99,35 +75,23 @@
     <div class="Homepage__card">
       <h2 class="Homepage__card__title"><span class="red">Most Popular</span> Categories</h2>
       <div class="Categories__container cf">
-        <div class="Category__block">
-          <div class="Category__block__heading">
-            <!-- <img src="/static/home/img/icons/categories-icon/motors-icon.png"> -->
-            <a href="<%= show_category_page_path(@motor_category.alias_name) %>">
-              <span style="color: #7C6085;"><%= @motor_category.name %></span>
-              <span class="Category__block__count" v-cloak><%= @motor_category.children.count %></span>
-            </a>
-            <a href="#motors-modal" class="Categories__view__all">View All</a>
+        <% @categories.each do |category| %>
+          <div class="Category__block">
+            <div class="Category__block__heading">
+              <!-- <img src="/static/home/img/icons/categories-icon/motors-icon.png"> -->
+              <a href="<%= show_category_page_path(category.alias_name) %>">
+                <span style="color: #7C6085;"><%= category.name %></span>
+                <span class="Category__block__count" v-cloak><%= category.children.count %></span>
+              </a>
+              <a href="#motors-modal" class="Categories__view__all">View All</a>
+            </div>
+            <div class="Category__links__area">
+              <% category.children.each do |child| %>
+                <%= link_to(child.name,show_category_page_with_children_path(category.alias_name,child.alias_name),:class => "Category__link__button") %>
+              <% end %>  
+            </div>
           </div>
-          <div class="Category__links__area">
-            <% @motor_category.children.each do |child| %>
-              <%= link_to(child.name,show_category_page_with_children_path(@motor_category.alias_name,child.alias_name),:class => "Category__link__button") %>
-            <% end %>  
-          </div>
-        </div>
-        <div class="Category__block">
-          <div class="Category__block__heading">
-            <a href="<%= show_category_page_path(@classified_category.alias_name) %>">
-              <span style="color: #68BD45;"><%= @classified_category.name %></span>
-              <span class="Category__block__count" v-cloak><%= @classified_category.children.count %></span>
-            </a>
-            <a href="#item-for-sale-modal" class="Categories__view__all">View All</a>
-          </div>
-          <div class="Category__links__area">
-            <% @classified_category.children.each do |child| %>
-              <%= link_to(child.name,show_category_page_with_children_path(@classified_category.alias_name,child.alias_name),:class => "Category__link__button") %>
-            <% end %>  
-          </div>
-        </div>
+        <% end %>
         <div class="Category__block mr0">
           <div class="Category__all">
         	<div id="motors-modal" class="Category__modal__block mfp-hide">

@@ -14,8 +14,6 @@ class ApplicationController < ActionController::Base
 
   def set_menu
   	@categories = Category.where(parent_id: nil)
-    @motor_category = @categories.where(name: "Motors").last
-    @classified_category = @categories.where(name: "Classifieds").last
   end
   
 end

@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<% if @category.alias_name == "auto-accessories-parts" %>
+<% if @category.html_view == "0" %>
   <%= render 'auto_accessories_form', advertisement: @advertisement %>
-<% elsif @category.alias_name == "user-car-for-sale" %>
+<% elsif @category.html_view == "1" %>
   <%= render 'used_car_for_sale_form', advertisement: @advertisement %>  
 <% else %>
   <%= render 'form', advertisement: @advertisement %>

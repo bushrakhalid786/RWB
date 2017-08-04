@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   match "choose-category" => "home#choose_category" , as: "choose_category",via: :get
   match "/category/:alias_name" => "home#show_category_page" , as: "show_category_page",via: :get
   match "/category/:alias_name/:child_alias_name" => "home#show_category_page" , as: "show_category_page_with_children",via: :get
-  match "/search"=> "home#search",via: [:get,:post]
+  match "/search"=> "home#search",via: [:get]
   root to: 'home#home'
 end

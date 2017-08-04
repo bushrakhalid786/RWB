@@ -34,37 +34,25 @@
   <ul class="nav-container">
     <li class="nav-container-main">
       <ul id="navbar-id" class="navbar">
-        <li class="parent more" id="nav-motors">
-          <a href='<%= show_category_page_path(@motor_category.alias_name) %>' title=""><span class="more"><%= @motor_category.name %></span></a>
-          <ul id="nav-categories-list-container" class='navbar-inner '>
-            <li class='nav-inner-content'>
-              <ul class='nav-col-list'>
-                <% @motor_category.children.each do |children| %>
-                  <li>
-                    <a href='<%= show_category_page_with_children_path(@motor_category.alias_name,children.alias_name) %>'><%= children.name %>
-                    <strong><%= Advertisement.by_categories(children.id).count %></strong></a>
-                  </li>
-                <% end %>  
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class="parent more" id="nav-classified">
-          <a href='<%= show_category_page_path(@classified_category.alias_name) %>' title=""><span class="more"><%= @classified_category.name %></span></a>
-          <ul id="nav-categories-list-container" class='navbar-inner '>
-            <li class='nav-inner-content'>
-              <ul class='nav-col-list'>
-                <% @classified_category.children.each do |children| %>
-                  <li>
-                    <a href='<%= show_category_page_with_children_path(@classified_category.alias_name,children.alias_name) %>'><%= children.name %>
-                    <strong><%= Advertisement.by_categories(children.id).count %></strong>
-                    </a>
-                  </li>
-                <% end %>  
-              </ul>
-            </li>
-          </ul>
-        </li>
+        <% @categories.each do |category|%>
+          <li class="parent more" id="nav-motors">
+            <a href='<%= show_category_page_path(category.alias_name) %>' title="">
+              <span class="more"><%= category.name %></span>
+            </a>
+            <ul id="nav-categories-list-container" class='navbar-inner '>
+              <li class='nav-inner-content'>
+                <ul class='nav-col-list'>
+                  <% category.children.each do |children| %>
+                    <li>
+                      <a href='<%= show_category_page_with_children_path(category.alias_name,children.alias_name) %>'><%= children.name %>
+                      <strong><%= Advertisement.by_categories(children.id).count %></strong></a>
+                    </li>
+                  <% end %>  
+                </ul>
+              </li>
+            </ul>
+          </li>
+        <% end %>  
       </ul>
     </li>
   </ul>

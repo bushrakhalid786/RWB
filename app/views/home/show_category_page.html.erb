@@ -4,7 +4,7 @@
       <h1 class="Hero__title" v-show="currentCategory == '--'">
         The best place to buy your car and sell your house hold items <br> in Regensburg.
       </h1>
-      <%= render :partial => "search_box_area",locals: {type: params[:search_type],alias_name: params[:alias_name] || params[:category]} %>
+      <%= render :partial => "search_box_area",locals: {type: params[:search_type],alias_name: params[:alias_name] || params[:category], html_view: (@category.present? ? @category.html_view : "")} %>
     </div>
     <% if params[:action] == "search" %>
       <%= render  "search_category_page" %>
