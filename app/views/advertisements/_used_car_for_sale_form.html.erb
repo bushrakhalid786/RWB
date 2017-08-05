@@ -22,7 +22,7 @@
           <div class="required-field">
             <%= f.text_field "title",:placeholder => "Ad Title", :maxlength => "20",:required => true %>
             <%= f.text_field "price",:placeholder => "Price", :maxlength => "20",:required => true  %>
-            <%= f.select "make",options_for_select([["Make",""],["Honda","Honda"],["Toyota","Toyota"],["BMW","BMW"],["Jeep","Jeep"],["Land Rover","Land Rover"]],selected: "Make") %>
+            <%= f.select "make_id",options_for_select([["Make",""]] + Make.pluck("name","id"),selected: "") %>
             <%= f.text_area "description",:placeholder => "Describe",:cols => "40",:rows => "10",:required => true %>
             <%= f.text_field "kilometers",:placeholder => "Kilometers", :maxlength => "10",:pattern =>"[0-9]*" ,:required => true %>
             <% year_arr = [["Year",""]]+((Time.now.year - 25)..(Time.now.year)).to_a.reverse.collect{|aa| [aa,aa]} %>
@@ -99,7 +99,7 @@
               <% end %>
             </ul>
           </div>
-          <div class="technical-features ">
+          <div class="extras">
             <label for="id_technical_features" >
               <br>
               <h4> Technical Features: </h4>

@@ -7,7 +7,7 @@
           <div class="required-field">
             <%= text_field "title",:placeholder => "Ad Title", :maxlength => "20" %>
             <%= text_field "price",:placeholder => "Price", :maxlength => "20",:pattern =>"^\d+(\.\d{1,2})?$"  %>
-            <%= select_tag "make",options_for_select([["Make",""],["Honda","Honda"],["Toyota","Toyota"],["BMW","BMW"],["Jeep","Jeep"],["Land Rover","Land Rover"]],selected: "Day") %>
+            <%= f.select "make_id",options_for_select([["Make",""]] + Make.pluck("name","id"),selected: "") %>
             <%= text_area "description",:placeholder => "Describe your Car",:cols => "40",:rows => "10" %>
             <%= text_field "kilometers",:placeholder => "Kilometers", :maxlength => "10",:pattern =>"[0-9]*"  %>
             <% year_arr = [["Year",""]]+((Time.now.year - 25)..(Time.now.year)).to_a.reverse.collect{|aa| [aa,aa]} %>

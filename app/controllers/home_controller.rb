@@ -41,7 +41,7 @@ class HomeController < ApplicationController
                              with(:category_id, id.to_i) if id.present?
                            end 
                          end
-                         with(:make, search_params[:make]) if search_params[:make].present?
+                         with(:make_id, search_params[:make_id]) if search_params[:make_id].present?
                          with(:year, search_params[:year]) if search_params[:year].present?
                        end
       @all_ads = advertisements.results.paginate(page: params[:page],per_page: 30)

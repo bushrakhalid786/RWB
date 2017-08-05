@@ -22,7 +22,7 @@
           <div class="required-field">
             <%= f.text_field "title",:placeholder => "Ad Title", :maxlength => "20",:required => true %>
             <%= f.text_field "price",:placeholder => "Price", :maxlength => "20",:required => true  %>
-            <%= f.select "make",options_for_select([["Make",""],["Honda","Honda"],["Toyota","Toyota"],["BMW","BMW"],["Jeep","Jeep"],["Land Rover","Land Rover"]],selected: "Day") %>
+            <%= f.select "make_id",options_for_select([["Make",""]] + Make.pluck("name","id"),selected: "") %>
             <%= f.text_area "description",:placeholder => "Describe",:cols => "40",:rows => "10",:required => true %>
             <% condition_arr = [["Condition",""],["Perfect inside and out","Perfect inside and out"],["A bit of wear & tear, all repaired","A bit of wear & tear, all repaired"],["Normal wear & tear, a few issues","Normal wear & tear, a few issues"],["Lots of wear & tear to the body","Lots of wear & tear to the body"]] %>
             <%= f.select("condition",options_for_select(condition_arr,selected: ""),{},id: "id_body_condition", required: true,include_blank: false) %>

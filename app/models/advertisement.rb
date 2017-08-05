@@ -1,6 +1,7 @@
 class Advertisement < ApplicationRecord
   belongs_to :category
   has_one :location
+  has_one :make
   has_many :images, :as => :attachable
   has_one :main_image,-> { where "filename = 'main_image'" }, :as => :attachable, :dependent => :destroy, :class_name => 'Image'
   has_many :alternate_images,-> { where "filename = 'alternate_image'" }, :as => :attachable, :dependent => :destroy, :class_name => 'Image'
@@ -9,8 +10,8 @@ class Advertisement < ApplicationRecord
 
   searchable do
     text :title, boost: 2
-    text :make
-    text :year
+    integer :make_id
+    string :year
     integer :category_id
     time    :updated_at
   end

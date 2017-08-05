@@ -5,7 +5,7 @@
         <% ad_array.compact.each do |ad| %>
           <a href="/search/?keywords=%23starwars" class="Trending__block">
             <div class="Trending__icon">
-              <%= image_tag ad.main_image.avatar.url(:thumb),:alt => "No Image" ,:style => "width: 28%" %> 
+              <%= image_tag ad.main_image.avatar.url(:thumb),:alt => "No Image Available" ,:style => "width: 98%;height: 98%" %>
             </div>
             <div class="Trending__tag"><%= ad.title %></div>
           </a>
