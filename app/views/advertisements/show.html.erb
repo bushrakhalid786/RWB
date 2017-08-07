@@ -1,94 +1,63 @@
 <%= stylesheet_link_tag "application/fotorama" %>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <!-- 33 KB -->
-
-
 <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
-
 <div id="content-wrapper">                
   <div class="Homepage">
-    <div class="Hero__container2">
-      <div class="Searchbox__container">
-        <div v-show="currentCategory != '--'" class="Searchbox__basic__search">
-          <div id="search-widget" v-cloak>
-            <form method="get" id="search-widget-form">
-              <div id="search-content">
-                <div id="keywords">
-                  <input id="id_keywords" type="text" name="keywords" value="" class="text-field" />
-                </div>
-                <input type='hidden' name='is_search' value='1'/>
-                <input type="submit" value="Search" id="search-button" class="lite-blue awesome" />
-              </div>
-            </form>
-          </div> 
-        </div>
-        <div class="Searchbox__bottom">
-          <select id="" name="subcat" class="Searchbox__keyword__input" style="width: 285px; height: 25px;" >
-            <option value="--">All</option>
-            <option value="UC">Used Cars</option>
-            <option value="CL">Accessories</option>
-          </select>
-          <select id="" name="motor_make" class="Searchbox__keyword__input" style="width: 285px; height: 25px;" >
-            <option value="--">All</option>
-            <option value="01">Honda</option>
-            <option value="02">Toyota</option>
-            <option value="03">Jeep</option>
-            <option value="03">Land Rover</option>
-          </select>
-          <select id="" name="motor_year" class="Searchbox__keyword__input" style="width: 100px; height: 25px;" >
-            <option value="--">Year</option>
-            <option value="2014">2014</option>
-            <option value="2015">2015</option>
-            <option value="2016">2016</option>
-            <option value="2017">2017</option>
-          </select>
-          <br><br>
-          <input type="text" class="Searchbox__keyword__input" placeholder="Enter keywords" >
-          <input type="submit" class="Searchbox__search__button" value="Search">
-        </div>
-      </div>
-    </div>
+    <%= render :partial => "search_box",locals: {category: @category ,alias_name: (@parent_category.present? ? @parent_category.alias_name : ""), html_view: (@category.present? ? @category.html_view : "")} %>
     <div class="Homepage__card">
-      <h3><span class="red">Motors >> Used Cars</h3>
-      <div class="Trending__container cf">
-        <div id="photos">
-          <span id="watch-this" class="classified-detail-buttons" align="right">
+      <div>
+      <h3>
+        <span class="red"><%= @parent_category.name %> >> <%= @category.name %>
+        </span>  
+      </h3>
+                <span id="watch-this" class="classified-detail-buttons" align="right">
             <span id="c_id_13561955:c_type_200:watch_this">
               <a href="/watchlist/motors/used-cars/13561955/1/" id="watch_this_logged">
                 <div style="font-size: 24px; line-height: 1.5em;"><i class="fa fa-fw fa-star-o"></i></div>
               </a>
             </span>
           </span>
-          <h2 class="Homepage__card__title"><span class="red">Ad Title 2016 Mercedes Benz G63 AMG 436 Edition</h2>
-          <div class="fotorama" data-nav="thumbs" align="center">
-            <img src="https://e0415552026373f497aa-79445249ccb41a60f7b99c8ef6df8604.ssl.cf3.rackcdn.com/4_async_wmarker/2017/7/29/2628f989fae4ce628118c3a1ef91959a3bd4ddbd/main.jpeg">
-            <img src="https://e0415552026373f497aa-79445249ccb41a60f7b99c8ef6df8604.ssl.cf3.rackcdn.com/4_async_wmarker/2017/7/29/e03a74ac564b932153add5fe882ff349881f01df/main.jpeg">
-            <img src="https://e0415552026373f497aa-79445249ccb41a60f7b99c8ef6df8604.ssl.cf3.rackcdn.com/4_async_wmarker/2017/7/29/02a3aab6637ae002fd301acd2c3fe9588fd0e796/main.jpeg">
-            <img src="https://e0415552026373f497aa-79445249ccb41a60f7b99c8ef6df8604.ssl.cf3.rackcdn.com/4_async_wmarker/2017/7/29/23ed4876aa6a14b31ec986b3f2c1fcf749f52221/main.jpeg">
-            <img src="https://e0415552026373f497aa-79445249ccb41a60f7b99c8ef6df8604.ssl.cf3.rackcdn.com/4_async_wmarker/2017/7/29/0f68588b36142884a2f6fc243bdc9b7e40a85bde/main.jpeg">
-            <img src="https://e0415552026373f497aa-79445249ccb41a60f7b99c8ef6df8604.ssl.cf3.rackcdn.com/4_async_wmarker/2017/7/29/c8ae2a3634ee5161d6b7085c7b1036304da57475/main.jpeg">
+      </div>
+      <div class="Trending__container cf">
+        <div id="photos">
+
+          <h2 class="Homepage__card__title">
+            <span class="red">
+              <%= @advertisement.title %>
+            </span>
+          </h2>
+          <div class="fotorama" data-width="700" data-maxwidth="100%"data-ratio="16/9" data-allowfullscreen="true" data-nav="thumbs" align="center">
+            <% empty_image_loop = 10 - @advertisement.images.count %>
+            <% @advertisement.images.each do |image| %>
+              <%= image_tag(image.avatar.url,size: "1050x1050") %>
+            <% end %>
+            <% empty_image_loop.times.each do |aa| %>
+              <%= image_tag("no-image-available.jpg") %>
+            <% end %>
           </div>
         </div>             
         <br>
         <div align="center">
-          <h2 class="Homepage__card__title"><span class="red">Price: € 5198.00</h2>   
-          <div class="posted-on">Posted on: 3rd August 2017</div>
-          <div class="posted-on">Contact Info: Phone No</div> 
-          <div class="posted-on">GPS Coordinates: ###</div> 
+          <h2 class="Homepage__card__title">
+            <span class="red">Price: € <%= @advertisement.price %></span>
+          </h2>   
+          <div class="posted-on">Posted on: <%= @advertisement.updated_at.strftime("%d %B %Y") %></div>
+          <div class="posted-on">Contact Info: <%= @advertisement.phone_number %></div> 
+          <div class="posted-on">GPS Coordinates: <%= @advertisement.gps_coordinate %></div> 
           <br><br>
           <table width="70%" border="1" bordercolor="#FcFcFc">
-            <tr>
-              <td>Label</td><td>Data</td><td>Label</td><td>Data</td>
-            </tr>
-            <tr>
-              <td>Label</td><td>Data</td><td>Label</td><td>Data</td>
-            </tr>
-            <tr>
-              <td>Label</td><td>Data</td><td>Label</td><td>Data</td>
-            </tr>
+            <% data_array = populate_data(@advertisement) %>
+            <% data_array.in_groups_of(2).each do |datas| %> 
+              <tr>
+                <% datas.each do |key| %> 
+                  <td><%= key.keys[0].to_s %></td>
+                  <td><%=key.values[0].to_s %></td>
+                <% end %>
+                </tr>
+            <% end %>
           </table>
           <br>
           <h2 class="Homepage__card__title"><span class="black">Description</h2>
-            This is the description of the ad .....
+            <%= @advertisement.description %>
         </div> 
       </div>
     </div>

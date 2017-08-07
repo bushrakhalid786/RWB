@@ -1,4 +1,6 @@
 class AdvertisementsController < ApplicationController
+  before_action :authenticate_user!
+
   before_action :set_advertisement, only: [:show, :edit, :update, :destroy]
 
   # GET /advertisements
@@ -11,6 +13,8 @@ class AdvertisementsController < ApplicationController
   # GET /advertisements/1.json
   def show
     @advertisement = Advertisement.where(id: params[:id]).last
+    @category = @advertisement.category if @advertisement.present?
+    @parent_category = @category.parent if @category.present?
   end
 
   # GET /advertisements/new
