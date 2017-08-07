@@ -3,6 +3,7 @@ development:
   encoding: utf8
   database: rbw_development
   pool: 5
+  host: localhost
   username: root
   password: root
 
@@ -11,6 +12,7 @@ test:
   encoding: utf8
   database: rbw_test
   pool: 5
+  host: localhost
   username: root
   password: root
 
@@ -19,6 +21,7 @@ staging:
   encoding: utf8
   database: rbw_staging
   pool: 5
+  host: localhost
   username: root
   password: root
   socket: /var/run/mysqld/mysqld.sock
@@ -27,6 +30,7 @@ production:
   adapter: mysql2
   encoding: utf8
   database: rbw_production
+  host: localhost
   pool: 5
   username: root
   password: root
