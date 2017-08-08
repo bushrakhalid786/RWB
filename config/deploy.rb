@@ -54,7 +54,7 @@ end
 set :ssh_options, { forward_agent: true, keys: rsa_key, keys_only: false }
 
 
-server '52.2.139.74', user: 'deploy', roles: %w{web app db}
+server '18.220.78.163', user: 'deploy', roles: %w{web app db}
 
 set :pty, true
 set :linked_files, %w{config/database.yml config/application.yml}
