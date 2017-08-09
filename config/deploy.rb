@@ -5,7 +5,6 @@ set :application, "regensburg"
 set :repo_url, "git@github.com:bushrakhalid786/RWB.git"
 set :branch, :master
 set :deploy_to, '/home/deploy/regensburg'
-<<<<<<< HEAD
 rsa_keys = [
   '~/.ssh/id_rsa'
 ]
@@ -21,8 +20,6 @@ set :ssh_options, { forward_agent: true, keys: rsa_key, keys_only: false, verbos
 
 server '18.220.76.140', user: 'deploy', roles: %w{web app db}
 
-=======
->>>>>>> 73e66ccd2b504144cc3be32d7a7e4c813eec0de5
 set :pty, true
 set :linked_files, %w{config/database.yml config/application.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
