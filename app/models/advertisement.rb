@@ -17,17 +17,18 @@ class Advertisement < ApplicationRecord
   end
 
   def main_image=(image)
- 	img = Image.new(filename: "main_image",attachable_id:self.id,attachable_type: self.class)
- 	img.avatar = image
- 	img.save
+   	img = Image.new(filename: "main_image",attachable_id:self.id,attachable_type: self.class)
+ 	  img.avatar = image
+ 	  img.save
   end                                
 
   def alternate_images=(alt_images)
+    
     alt_images.each do |alt_image|
-      alt_img = self.alternate_images.new(filename: "alternate_image")
- 	  alt_img.avatar = alt_image
+      alt_img = self.alternate_images.new(filename: "alternate_image",attachable_id:self.id,attachable_type: self.class)
+ 	    alt_img.avatar = alt_image
+      alt_img.save
     end
-    self.save	 
   end    
 
 end

@@ -6,12 +6,6 @@ class Image < ApplicationRecord
   has_attached_file :avatar,
                     :path_prefix => "/public/images/",
                     :path => ":rails_root/public/images/:id",
-                    :url  => "/images/:id",
-                    :styles => {
-                                :thumb => "172x83#",
-                                :small  => "42x42>",
-                                :medium => "60x60"#,
-                                }
-
+                    :url  => "/images/:id"
 
 end

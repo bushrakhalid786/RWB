@@ -4,7 +4,7 @@ module ApplicationHelper
 	data_array = []
 	data = advertisement.attributes.delete_if{|k,v| ["id","title","price","description","phone_number","gps_coordinate","created_at","updated_at"].include?(k)}
   	not_null_data = data.delete_if{|k,v| v.blank?}
-  	not_null_data.each do |key,value|
+    not_null_data.each do |key,value|
   	  if key == "category_id"
   	  	category_name = Category.where(id: value).last.name
   	  	data_array << {"Category": category_name}

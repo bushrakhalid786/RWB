@@ -40,6 +40,7 @@ gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in developm
 gem 'will_paginate'
 gem 'progress_bar'
 gem "cancancan"
+gem 'net-ssh', '~> 2.9.2.beta'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -68,7 +69,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-gem 'pg'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

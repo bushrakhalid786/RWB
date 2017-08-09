@@ -121,7 +121,7 @@
               <label for="id_photo0" >
                 Main photo:
               </label>
-              <%= f.file_field "main_image",:style=> "margin-top: 10px" %>
+              <%= file_field_tag "main_image",:style=> "margin-top: 10px" %>
             </div>
             <% (0..9).to_a.each do |number| %>
               <div class="" style="margin-top: 10px">
@@ -130,7 +130,7 @@
                     Alternative Photo:
                   <% end %>  
                 </label>
-                <%= file_field_tag "advertisement[alternative_images][]",:style=> "margin-top: 10px" %>
+                <%= file_field_tag "alternative_images[]",:style=> "margin-top: 10px" %>
               </div>
             <% end %>
           </div>
@@ -154,7 +154,7 @@
   </div>
 <% end %>
 <style type="text/css">
-  #advertisement_alternative_images_ {
+  #alternative_images_ {
     border-left: 2px solid #ee0400;
   }
 </style>
