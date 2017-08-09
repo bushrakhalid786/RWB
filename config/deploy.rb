@@ -2,66 +2,15 @@
 lock "3.9.0"
 
 set :application, "regensburg"
-set :repo_url, "git@github.com/bushrakhalid786/RWB.git"
-
-# Default branch is :master
-# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-
-# Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, "/var/www/my_app_name"
-
-# Default value for :format is :airbrussh.
-# set :format, :airbrussh
-
-# You can configure the Airbrussh format using :format_options.
-# These are the defaults.
-# set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
-
-# Default value for :pty is false
-# set :pty, true
-
-# Default value for :linked_files is []
-# append :linked_files, "config/database.yml", "config/secrets.yml"
-
-# Default value for linked_dirs is []
-# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
-
-# Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
-# Default value for local_user is ENV['USER']
-# set :local_user, -> { `git config user.name`.chomp }
-
-# Default value for keep_releases is 5
-# set :keep_releases, 5
-set  :git
-
-set :use_sudo, false
-set :deploy_via, :copy
-
+set :repo_url, "git@github.com:bushrakhalid786/RWB.git"
 set :branch, :master
 set :deploy_to, '/home/deploy/regensburg'
-rsa_keys = [
-  '~/.ssh/id_rsa'
-]
-rsa_key = ''
-rsa_keys.each do |name|
-  if File.exists?(File.expand_path(name))
-    rsa_key = name
-    break
-  end
-end
-set :ssh_options, { forward_agent: true, keys: rsa_key, keys_only: false }
-
-
-server '52.2.139.74', user: 'deploy', roles: %w{web app db}
-
 set :pty, true
 set :linked_files, %w{config/database.yml config/application.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
 set :keep_releases, 5
 set :rvm_type, :user
-set :rvm_ruby_version, 'jruby-1.7.19' # Edit this if you are using MRI Ruby
+set :rvm_ruby_version, 'ruby-2.4.0' # Edit this if you are using MRI Ruby
 
 set :puma_rackup, -> { File.join(current_path, 'config.ru') }
 set :puma_state, "#{shared_path}/tmp/pids/puma.state"
