@@ -11,4 +11,8 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( application/* )
 # Rails.application.config.assets.precompile += [/(^[^_\/]|\/[^_])[^\/]*$/]
 
-Rails.application.config.assets.precompile += %w( *.css *.js )
+Rails.application.config.assets.precompile += %w(
+application.css apply.css articles.css common.css
+company.css creators.css home.css portfolio.css scaffolds.css
+external/*.css home/*.css navigation/*.css
+ *.js )
