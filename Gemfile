@@ -50,11 +50,11 @@ group :development, :test do
 end
 gem 'figaro'
 group :development do
-  gem 'capistrano'
-  gem 'capistrano3-puma'
-  gem 'capistrano-rails', require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-rvm'
+  gem 'capistrano', '3.5.0'
+  gem 'capistrano3-puma', '1.2.1'
+  gem 'capistrano-rails','1.1.7', require: false
+  gem 'capistrano-bundler','1.1.4', require: false
+  gem 'capistrano-rvm','0.1.2'
 end
 
 group :development do
