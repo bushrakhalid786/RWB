@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.5.0'
+lock '3.9.0'
 
 set :application, "regensburg"
 set :repo_url, "git@github.com:bushrakhalid786/RWB.git"
@@ -15,11 +15,11 @@ rsa_keys.each do |name|
     break
   end
 end
-set :ssh_options, { forward_agent: true, keys: rsa_key, keys_only: false, verbose: :debug }
+set :ssh_options, { forward_agent: true, keys: rsa_key, keys_only: false}
 
 
 
-server '18.220.78.163', user: 'deploy', roles: %w{web app db}
+server '13.58.225.207', user: 'deploy', roles: %w{web app db}
 
 set :pty, true
 set :linked_files, %w{config/database.yml config/application.yml}

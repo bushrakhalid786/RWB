@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-# ruby "2.4.0"
+ruby "2.4.0"
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -51,11 +51,11 @@ group :development, :test do
 end
 gem 'figaro'
 group :development do
-  gem 'capistrano', '3.5.0'
-  gem 'capistrano3-puma', '1.2.1'
-  gem 'capistrano-rails','1.1.7', require: false
-  gem 'capistrano-bundler','1.1.4', require: false
-  gem 'capistrano-rvm','0.1.2'
+  gem 'capistrano'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm'
 end
 
 group :development do
