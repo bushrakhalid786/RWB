@@ -4,19 +4,7 @@
   <div class="Homepage">
     <%= render :partial => "search_box",locals: {category: @category ,alias_name: (@parent_category.present? ? @parent_category.alias_name : ""), html_view: (@category.present? ? @category.html_view : "")} %>
     <div class="Homepage__card">
-      <div>
-      <h3>
-        <span class="red"><%= @parent_category.name %> >> <%= @category.name %>
-        </span>  
-      </h3>
-                <span id="watch-this" class="classified-detail-buttons" align="right">
-            <span id="c_id_13561955:c_type_200:watch_this">
-              <a href="/watchlist/motors/used-cars/13561955/1/" id="watch_this_logged">
-                <div style="font-size: 24px; line-height: 1.5em;"><i class="fa fa-fw fa-star-o"></i></div>
-              </a>
-            </span>
-          </span>
-      </div>
+
       <div class="Trending__container cf">
         <div id="photos">
 
@@ -48,9 +36,11 @@
             <% data_array = populate_data(@advertisement) %>
             <% data_array.in_groups_of(2).each do |datas| %> 
               <tr>
-                <% datas.each do |key| %> 
-                  <td><%= key.keys[0].to_s %></td>
-                  <td><%=key.values[0].to_s %></td>
+                <% datas.each do |key| %>
+                  <% if key.present? %>
+                    <td><%= key.keys[0].to_s %></td>
+                    <td><%=key.values[0].to_s %></td>
+                  <% end %>
                 <% end %>
                 </tr>
             <% end %>

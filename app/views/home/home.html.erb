@@ -54,7 +54,11 @@
         <% @latest_ad.each do |latest_ad| %>
           <a href="<%= advertisement_path(latest_ad.id) %>" class="Trending__block">
             <div class="Trending__icon">
-              <%= image_tag latest_ad.main_image.avatar.url(:thumb),:alt => "No Image Available" ,:style => "width: 98%;height: 98%" %>
+              <% if latest_ad.main_image.present? %>
+                <%= image_tag latest_ad.main_image.avatar.url(:thumb),:alt => "No Image Available" ,:style => "width: 98%;height: 98%" %>
+              <% else %>
+                <span style="margin-left: 23px">No Image Available</span>
+              <% end %>  
             </div>
             <div class="Trending__tag"><%= latest_ad.title %></div>
           </a>

@@ -5,6 +5,22 @@ set :application, "regensburg"
 set :repo_url, "git@github.com:bushrakhalid786/RWB.git"
 set :branch, :master
 set :deploy_to, '/home/deploy/regensburg'
+rsa_keys = [
+  '~/.ssh/id_rsa'
+]
+rsa_key = ''
+rsa_keys.each do |name|
+  if File.exists?(File.expand_path(name))
+    rsa_key = name
+    break
+  end
+end
+set :ssh_options, { forward_agent: true, keys: rsa_key, keys_only: false, verbose: :debug }
+
+
+
+server '18.220.78.163', user: 'deploy', roles: %w{web app db}
+
 set :pty, true
 set :linked_files, %w{config/database.yml config/application.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}

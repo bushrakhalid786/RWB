@@ -40,6 +40,7 @@ gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in developm
 gem 'will_paginate'
 gem 'progress_bar'
 gem "cancancan"
+gem 'net-ssh', '~> 2.9.2.beta'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

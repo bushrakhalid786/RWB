@@ -1,5 +1,5 @@
 class AdvertisementsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
 
   before_action :set_advertisement, only: [:show, :edit, :update, :destroy]
 
@@ -32,9 +32,9 @@ class AdvertisementsController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
       @advertisement = Advertisement.new(advertisement_params)
-      status = @advertisement.save
-      @advertisement.main_image = params[:advertisement][:main_image] if params[:advertisement][:main_image].present?
-      @advertisement.alternate_images = params[:advertisement][:alternative_images] if params[:advertisement][:alternative_images].present?
+      status = @advertisement.save(:validate => false)
+      @advertisement.main_image = params[:main_image] if params[:main_image].present?
+      @advertisement.alternate_images = params[:alternative_images] if params[:alternative_images].present?
     end
     respond_to do |format|
       if status
@@ -79,6 +79,7 @@ class AdvertisementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def advertisement_params
-      params.require(:advertisement).permit(:location_id,:category_id,:active,:title, :price, :make, :description, :kilometers, :year, :condition, :phone_number, :body_type, :color, :transition_type, :regional_specs, :no_of_cylinders, :doors, :horse_power, :warrenty, :fuel_type, :extras, :technical_features, :locate_your_item, :gps_coordinate)
+      p = params.require(:advertisement).permit(:make_id,:location_id,:category_id,:active,:title, :price, :make, :description, :kilometers, :year, :condition, :phone_number, :body_type, :color, :transition_type, :regional_specs, :no_of_cylinders, :doors, :horse_power, :warrenty, :fuel_type, :extras, :technical_features, :locate_your_item, :gps_coordinate)
+    
     end
 end
