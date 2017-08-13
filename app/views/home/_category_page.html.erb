@@ -1,12 +1,18 @@
-<div class="Homepage__card">
-  <h2 class="Homepage__card__title"><span class="red">All</span> Ads</h2>
+<div class="Homepage__card" >
+  <h2 class="Homepage__card__title" style="text-align: left;">
+    <span class="red">All</span> Ads
+  </h2>
   <% if @all_ads.present? %>
     <% @all_ads.to_a.in_groups_of(6) do |ad_array| %>
       <div class="Trending__container cf">
         <% ad_array.compact.each do |ad| %>
           <a href="/search/?keywords=%23starwars" class="Trending__block">
             <div class="Trending__icon">
-              <%= image_tag ad.main_image.avatar.url(:thumb),:alt => "No Image Available" ,:style => "width: 98%;height: 98%" %>
+              <% if ad.main_image.present? %>
+                <%= image_tag ad.main_image.avatar.url(:thumb),:alt => "No Image Available" ,:style => "width: 98%;height: 98%" %>
+              <% else %>
+                <span style="margin-left: 23px">No Image Available</span>
+              <% end %>  
             </div>
             <div class="Trending__tag"><%= ad.title %></div>
           </a>

@@ -43,7 +43,6 @@ set :puma_worker_timeout, nil
 set :puma_init_active_record, true
 set :puma_preload_app, false
 
-before :deploy, :solr_stop
-after :deploy, :solr_symlink
-after :deploy, :solr_start
-after :deploy, :apache_restart
+# before :deploy, :solr_stop
+# after :deploy, :solr_symlink
+# after :deploy, :solr_start
