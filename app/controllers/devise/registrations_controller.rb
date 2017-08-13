@@ -7,6 +7,7 @@ class Devise::RegistrationsController < DeviseController
   def new
     build_resource({})
     yield resource if block_given?
+    @role = Role.where(name: "Normal User").last
     render :template => "devise/registrations/new"
   end
 

@@ -6,6 +6,7 @@
     <h4>Register for Free</h4>
     <p class="note">Note: All fields are mandatory</p>
   </div>
+  <%= f.hidden_field "role_id", @role.id if @role.present? %>
   <div class="clear"></div>
   <div class="form-row" hint="username@domain.com">
     <label for="id_email">Email Address</label>
