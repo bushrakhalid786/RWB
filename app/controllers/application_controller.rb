@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   	@categories = Category.where(parent_id: nil)
   end
 
-  def set_menu 
+  def set_role 
     @normal_user_role = Role.where(name: "Normal User").last
   end
   
