@@ -11,7 +11,7 @@
       <ul id="user-controls">
         <li class="fbsignin"></li>
         <% if signed_in? %>
-          <%= current_user.first_name + " " + current_user.last_name %> | 
+          <%= link_to current_user.first_name + " " + current_user.last_name,my_profile_path %> | 
           <%= link_to 'Logout', destroy_user_session_path , :method => 'delete'%>
         <% else %>
           <li><%= link_to 'Sign In', new_user_session_path %></li>

@@ -1,0 +1,70 @@
+<div id="content-wrapper" style="padding-top: 10px">
+  <h2 class="Homepage__card__title"><span class="red">My Profile</span></h2>
+  <div id="content-col">
+    <div class="clear"></div>       
+    <div id="tab2" class="tab_content active_content" style="margin-left: 20px;padding-top: 10px">
+      <div class="required-field">
+        <b><span class="red">Email:</span></b> <%= @user.email %>
+      </div><!-- end #tab2.tab_content -->
+      <div class="required-field" style="padding-top: 10px">
+        <b><span class="red">First Name:</span></b> <%= @user.first_name %>
+      </div><!-- end #tab2.tab_content -->
+      <div class="required-field" style="padding-top: 10px">
+        <b><span class="red">Last Name:</span></b> <%= @user.last_name %>
+      </div><!-- end #tab2.tab_content -->
+      <div class="required-field" style="padding-top: 10px">
+        <b><span class="red">Gender:</span></b> <%= @user.gender %>
+      </div><!-- end #tab2.tab_content -->
+    </div>
+  </div>  
+  <h2 class="Homepage__card__title" style="margin-top: 15px">
+    <span class="red">Bookmarked Advertisement</span>
+  </h2>
+  <div class="Homepage__card">
+    <% if @bookmark_advertisements.present? %>
+      <% @bookmark_advertisements.to_a.in_groups_of(6) do |bookmak_ad| %>
+        <div class="Trending__container cf">
+          <% bookmak_ad.compact.each do |ad| %>
+            <a href="<%= advertisement_path(ad.id) %>" class="Trending__block">
+              <div class="Trending__icon">
+                <% if ad.main_image.present? %>
+                  <%= image_tag ad.main_image.avatar.url(:thumb),:alt => "No Image Available" ,:style => "width: 98%;height: 98%" %>
+                  <% else %>
+                    <span style="margin-left: 23px">No Image Available</span>
+                  <% end %>  
+              </div>
+              <div class="Trending__tag"><%= ad.title %></div>
+            </a>
+          <% end %>      
+        </div>
+      <% end %>
+    <% else %>
+      <center>No Ad Found</center>
+    <% end %> 
+  </div>
+  <h2 class="Homepage__card__title" style="margin-top: 15px">
+    <span class="red">Advertisement's Posted</span>
+  </h2>
+  <div class="Homepage__card">
+    <% if @advertisements.present? %>
+      <% @advertisements.to_a.in_groups_of(6) do |ad_array| %>
+        <div class="Trending__container cf">
+          <% ad_array.compact.each do |ad| %>
+            <a href="<%= advertisement_path(ad.id) %>" class="Trending__block">
+              <div class="Trending__icon">
+                <% if ad.main_image.present? %>
+                  <%= image_tag ad.main_image.avatar.url(:thumb),:alt => "No Image Available" ,:style => "width: 98%;height: 98%" %>
+                  <% else %>
+                    <span style="margin-left: 23px">No Image Available</span>
+                  <% end %>  
+              </div>
+              <div class="Trending__tag"><%= ad.title %></div>
+            </a>
+          <% end %>      
+        </div>
+      <% end %>
+    <% else %>
+      <center>No Ad Found</center>
+    <% end %> 
+  </div> 
+</div>

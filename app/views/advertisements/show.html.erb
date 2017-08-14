@@ -1,16 +1,34 @@
+<style type="text/css">
+  .icon-c {
+    color: yellow;
+    font-size: 23 !important
+}
+
+</style>
 <%= stylesheet_link_tag "application/fotorama" %>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
 <div id="content-wrapper">                
   <div class="Homepage">
     <%= render :partial => "search_box",locals: {category: @category ,alias_name: (@parent_category.present? ? @parent_category.alias_name : ""), html_view: (@category.present? ? @category.html_view : "")} %>
     <div class="Homepage__card">
-
       <div class="Trending__container cf">
         <div id="photos">
-
           <h2 class="Homepage__card__title" style="text-align: left">
             <span class="red">
               <%= @advertisement.title %>
+            </span>
+            <%= hidden_field_tag "advertisement_id",@advertisement.id %>
+            <%= hidden_field_tag "user_id",current_user.id %>
+            <span style="margin-left: 82%;margin-top: 10%">
+              <a href="javascript:" onclick="save_as_bookmark()">
+                <span class="add-bookmark-block" style="font-size: 24px; line-height: 1.5em;">
+                  <% if @bookmark_present %>
+                    <i class="fa fa-star fa-lg icon-c"></i>
+                  <% else %>
+                    <i class="fa fa-fw fa-star-o i"></i>
+                  <% end %>  
+                </span>
+              </a>
             </span>
           </h2>
           <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs" align="center">
@@ -111,3 +129,21 @@
   </div>
   <br>
 </div> 
+<script type="text/javascript">
+  function save_as_bookmark(){
+    advertisement_id = $("#advertisement_id").val()
+    user_id = $("#user_id").val()
+    $.ajax({
+      type: "POST",
+      url: "/add-bookmark",
+      data: {"advertisement_id" : advertisement_id,"user_id": user_id},
+      beforeSend: function () {
+      },
+      success: function(response){
+        $(".add-bookmark-block").html("<i class='fa fa-star fa-lg icon-c'></i>")
+        return false;
+      }
+    })
+    return false;
+  }
+</script>>

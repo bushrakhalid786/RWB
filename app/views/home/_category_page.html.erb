@@ -6,7 +6,7 @@
     <% @all_ads.to_a.in_groups_of(6) do |ad_array| %>
       <div class="Trending__container cf">
         <% ad_array.compact.each do |ad| %>
-          <a href="/search/?keywords=%23starwars" class="Trending__block">
+          <a href="<%= advertisement_path(ad.id) %>" class="Trending__block">
             <div class="Trending__icon">
               <% if ad.main_image.present? %>
                 <%= image_tag ad.main_image.avatar.url(:thumb),:alt => "No Image Available" ,:style => "width: 98%;height: 98%" %>

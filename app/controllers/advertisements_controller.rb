@@ -15,6 +15,7 @@ class AdvertisementsController < ApplicationController
     @advertisement = Advertisement.where(id: params[:id]).last
     @category = @advertisement.category if @advertisement.present?
     @parent_category = @category.parent if @category.present?
+    @bookmark_present = current_user.bookmarks.where(advertisement_id: @advertisement.id).present?
     @ad_reply = AdReply.new
   end
 

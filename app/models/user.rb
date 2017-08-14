@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   belongs_to :role
   has_many :advertisements
+  has_many :bookmarks
   
   def admin?
     role and role.name == "Admin"
