@@ -1,0 +1,2 @@
+module AdRepliesHelper
+end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :ad_replies
   resources :images
   resources :advertisements
   resources :categories

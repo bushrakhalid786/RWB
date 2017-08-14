@@ -1,6 +1,7 @@
 <%= form_tag({:action => :create}, :multipart => true) do %>
   <%= hidden_field_tag "advertisement[category_id]", @category.id if @category.present? %>
   <%= hidden_field_tag "advertisement[active]", false %> 
+  <%= hidden_field_tag "advertisement[user_id]", current_user.id %> 
   <div id="content-wrapper">
     <fieldset id="fbsignin-form">
       <legend>Post your Ad (<%= @category.name if @category.present? %>)</legend>

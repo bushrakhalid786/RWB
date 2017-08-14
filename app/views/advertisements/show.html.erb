@@ -8,12 +8,12 @@
       <div class="Trending__container cf">
         <div id="photos">
 
-          <h2 class="Homepage__card__title">
+          <h2 class="Homepage__card__title" style="text-align: left">
             <span class="red">
               <%= @advertisement.title %>
             </span>
           </h2>
-          <div class="fotorama" data-width="700" data-maxwidth="100%"data-ratio="16/9" data-allowfullscreen="true" data-nav="thumbs" align="center">
+          <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs" align="center">
             <% empty_image_loop = 10 - @advertisement.images.count %>
             <% @advertisement.images.each do |image| %>
               <%= image_tag(image.avatar.url,size: "1050x1050") %>
@@ -60,19 +60,35 @@
       <div class="Trending__container cf">
         <div id="respond">
           <center>
-            <form method="post" enctype="multipart/form-data" action="" id="contact-form">
+            <%= form_for(@ad_reply) do |f| %>
+              <% if @ad_reply.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@ad_reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
+                  <ul>
+                    <% @ad_reply.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
               <table width="60%">    
                 <tr>
                   <td>Your Email</td>
-                  <td><input class="textbox" id="id_email" name="email" type="text"></td>
+                  <td>
+                  <%= hidden_field_tag "ad_reply[advertisement_id]",@advertisement.id %>
+                  <%= text_field_tag "ad_reply[email]","",:placeholder => "Email", :maxlength => "20",:id=> "id_phone_number",:required => true %>
                 </tr>
                 <tr>
                   <td>Phone No:</td>
-                  <td><input class="textbox" id="phone" name="phone" type="text"></td>
+                  <td>
+                    <%= text_field_tag "ad_reply[phone_number]","",:placeholder => "Phone number", :maxlength => "20",:pattern =>"\+?[0-9]*",:id=> "id_phone_number",:required => true %>
+                  </td>
                 </tr>
                 <tr>
                   <td>Message</td>
-                  <td><textarea cols="40" id="id_message" name="message" rows="10"></textarea></td>
+                  <td>
+                    <%= text_area_tag "ad_reply[message]","",:cols => "40",:rows => "10",:required => true %>
+                  </td>
                 </tr>
                 <tr>
                   <td></td>
@@ -83,10 +99,10 @@
                 </tr>
               </table>
               By clicking on 'Send Reply', I agree to the Regensburg <a href="/terms/">Terms &amp; Conditions</a> and <a href="/privacy/">Privacy Policy</a>
-              <button type="submit" class="large blue awesome dark-red-outline-hover">
-                Send reply
-              </button>        
-            </form>
+                <button type="submit" class="large blue awesome dark-red-outline-hover">
+                  Send reply
+                </button>
+            <% end %>
           </center>    
           <br>
         </div>

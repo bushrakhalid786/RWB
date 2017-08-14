@@ -11,6 +11,7 @@ module ApplicationHelper
   	  elsif key == "location_id"
   	  	location_name = Location.where(id: value).last.name
   	  	data_array << {"Location": location_name}
+      elsif key == "user_id"
   	  else	
   	  	data_array << {"#{key.camelize}": value}
   	  end	

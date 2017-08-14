@@ -1,6 +1,7 @@
 <%= form_for(advertisement) do |f| %>
   <%= f.hidden_field "category_id", value: @category.id if @category.present? %>
   <%= f.hidden_field "active",value: false %> 
+  <%= hidden_field_tag "advertisement[user_id]", current_user.id %> 
   <div id="content-wrapper">
     <fieldset id="fbsignin-form">
       <legend>Post your Ad (<%= @category.name %>)</legend>

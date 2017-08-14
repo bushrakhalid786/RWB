@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170805103430) do
+ActiveRecord::Schema.define(version: 20170814095840) do
+
+  create_table "ad_replies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "email"
+    t.string   "phone_number"
+    t.text     "message",          limit: 65535
+    t.integer  "advertisement_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
 
   create_table "advertisements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
@@ -40,6 +49,7 @@ ActiveRecord::Schema.define(version: 20170805103430) do
     t.boolean  "active"
     t.integer  "location_id"
     t.integer  "make_id"
+    t.integer  "user_id"
   end
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

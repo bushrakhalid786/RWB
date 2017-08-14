@@ -5,9 +5,9 @@ class Advertisement < ApplicationRecord
   has_many :images, :as => :attachable
   has_one :main_image,-> { where "filename = 'main_image'" }, :as => :attachable, :dependent => :destroy, :class_name => 'Image'
   has_many :alternate_images,-> { where "filename = 'alternate_image'" }, :as => :attachable, :dependent => :destroy, :class_name => 'Image'
-
+  has_many :ad_replies
   scope :by_categories, -> (category_ids){ where(category_id: category_ids) }
-
+  belongs_to :user
   searchable do
     text :title, boost: 2
     integer :make_id

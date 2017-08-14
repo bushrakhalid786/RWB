@@ -1,0 +1,17 @@
+<%= form_for(ad_reply) do |f| %>
+  <% if ad_reply.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ad_reply.errors.count, "error") %> prohibited this ad_reply from being saved:</h2>
+
+      <ul>
+      <% ad_reply.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

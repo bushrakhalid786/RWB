@@ -11,4 +11,4 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( application/* )
 # Rails.application.config.assets.precompile += [/(^[^_\/]|\/[^_])[^\/]*$/]
 
-Rails.application.config.assets.precompile += %w(application/*,rails_admin/rails_admin.scss.erb rails_admin/rails_admin.js)
+Rails.application.config.assets.precompile += %w(application/*,rails_admin/rails_admin.scss.erb rails_admin/rails_admin.js application/fotorama.css)

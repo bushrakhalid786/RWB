@@ -5,7 +5,8 @@ class User < ApplicationRecord
   		 :trackable, :validatable,:confirmable
 
   belongs_to :role
-
+  has_many :advertisements
+  
   def admin?
     role and role.name == "Admin"
   end		 
