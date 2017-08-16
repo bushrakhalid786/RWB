@@ -92,7 +92,7 @@ Rails.application.configure do
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  config.action_mailer.default_url_options = { :host => "obscure-mountain-14515.herokuapp.com" }
+  config.action_mailer.default_url_options = { :host => "13.58.225.207" }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
