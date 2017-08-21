@@ -32,13 +32,13 @@
             </span>
           </h2>
           <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs" align="center">
-            <% empty_image_loop = 10 - @advertisement.images.count %>
+            <%# empty_image_loop = 10 - @advertisement.images.count %>
             <% @advertisement.images.each do |image| %>
               <%= image_tag(image.avatar.url,size: "1050x1050") %>
             <% end %>
-            <% empty_image_loop.times.each do |aa| %>
-              <%= image_tag("no-image-available.jpg") %>
-            <% end %>
+            <%# empty_image_loop.times.each do |aa| %>
+              <%#= image_tag("no-image-available.jpg") %>
+            <%# end %>
           </div>
         </div>             
         <br>

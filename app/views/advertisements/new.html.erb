@@ -12,10 +12,12 @@
  	width: 95% !important;
  }
 </style>
-<% if @category.html_view == "0" %>
-  <%= render 'auto_accessories_form', advertisement: @advertisement %>
-<% elsif @category.html_view == "1" %>
-  <%= render 'used_car_for_sale_form', advertisement: @advertisement %>  
-<% else %>
-  <%= render 'form', advertisement: @advertisement %>
-<% end %>
+<%= form_tag({:action => :create}, :multipart => true) do %>
+  <% if @category.html_view == "0" %>
+    <%= render 'auto_accessories_form', advertisement: @advertisement %>
+  <% elsif @category.html_view == "1" %>
+    <%= render 'used_car_for_sale_form', advertisement: @advertisement %>  
+  <% else %>
+    <%= render 'form', advertisement: @advertisement %>
+  <% end %>
+<% end %>  

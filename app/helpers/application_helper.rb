@@ -9,8 +9,11 @@ module ApplicationHelper
   	  	category_name = Category.where(id: value).last.name
   	  	data_array << {"Category": category_name}
   	  elsif key == "location_id"
-  	  	location_name = Location.where(id: value).last.name
-  	  	data_array << {"Location": location_name}
+  	  	make_name = Make.where(id: value).last.name
+  	  	data_array << {"Make": make_name}
+      elsif key == "make_id"
+        location_name = Location.where(id: value).last.name
+        data_array << {"Location": location_name}
       elsif key == "user_id"
   	  else	
   	  	data_array << {"#{key.camelize}": value}

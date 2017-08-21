@@ -27,6 +27,8 @@ class AdvertisementsController < ApplicationController
 
   # GET /advertisements/1/edit
   def edit
+    @advertisement = Advertisement.where(id: params[:id]).last
+    @category = @advertisement.category
   end
 
   # POST /advertisements
@@ -52,9 +54,15 @@ class AdvertisementsController < ApplicationController
   # PATCH/PUT /advertisements/1
   # PATCH/PUT /advertisements/1.json
   def update
+    ActiveRecord::Base.transaction do
+      @advertisement.attributes = (advertisement_params)
+      status = @advertisement.save(:validate => false)
+      @advertisement.main_image = params[:main_image] if params[:main_image].present?
+      @advertisement.alternate_images = params[:alternative_images] if params[:alternative_images].present?
+    end
     respond_to do |format|
       if @advertisement.update(advertisement_params)
-        format.html { redirect_to @advertisement, notice: 'Advertisement was successfully updated.' }
+        format.html { redirect_to "/", notice: 'Advertisement was successfully updated.' }
         format.json { render :show, status: :ok, location: @advertisement }
       else
         format.html { render :edit }
@@ -81,7 +89,9 @@ class AdvertisementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def advertisement_params
-      p = params.require(:advertisement).permit(:user_id,:make_id,:location_id,:category_id,:active,:title, :price, :make, :description, :kilometers, :year, :condition, :phone_number, :body_type, :color, :transition_type, :regional_specs, :no_of_cylinders, :doors, :horse_power, :warrenty, :fuel_type, :extras, :technical_features, :locate_your_item, :gps_coordinate)
-    
+      technical_features = params[:advertisement][:technical_features].join(",")
+      extras = params[:advertisement][:extras].join(",")
+      p = params.require(:advertisement).permit(:extras, :technical_features,:user_id,:make_id,:location_id,:category_id,:active,:title, :price, :make, :description, :kilometers, :year, :condition, :phone_number, :body_type, :color, :transition_type, :regional_specs, :no_of_cylinders, :doors, :horse_power, :warrenty, :fuel_type, :extras, :technical_features, :locate_your_item, :gps_coordinate)
+      p.merge!({:technical_features => technical_features,:extras => extras})
     end
 end

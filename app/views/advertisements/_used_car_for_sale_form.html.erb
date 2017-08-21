@@ -1,4 +1,3 @@
-<%= form_tag({:action => :create}, :multipart => true) do %>
   <%= hidden_field_tag "advertisement[category_id]", @category.id if @category.present? %>
   <%= hidden_field_tag "advertisement[active]", false %> 
   <%= hidden_field_tag "advertisement[user_id]", current_user.id %> 
@@ -21,69 +20,69 @@
         <% end %>
         <div id="tab2" class="tab_content active_content">
           <div class="required-field">
-            <%= text_field_tag "advertisement[title]","",{:placeholder => "Ad Title", :maxlength => "20",:required => true} %>
-            <%= text_field_tag "advertisement[price]","",:placeholder => "Price", :maxlength => "20",:required => true  %>
-            <%= select_tag("advertisement[make_id]",options_for_select([["Make",""]] + Make.pluck("name","id"),selected: ""),{id: "id_body_condition", required: true,include_blank: false}) %>
-            <%= text_area_tag "advertisement[description]","",:placeholder => "Describe",:cols => "40",:rows => "10",:required => true %>
-            <%= text_field_tag "advertisement[kilometers]","",:placeholder => "Kilometers", :maxlength => "20",:pattern =>"[0-9]*",:required => true  %>
+            <%= text_field_tag "advertisement[title]",@advertisement.title,{:placeholder => "Ad Title", :maxlength => "20",:required => true} %>
+            <%= text_field_tag "advertisement[price]",@advertisement.price,:placeholder => "Price", :maxlength => "20",:required => true  %>
+            <%= select_tag("advertisement[make_id]",options_for_select([["Make",""]] + Make.pluck("name","id"),selected: @advertisement.new_record? ? "" : @advertisement.make_id),{id: "id_body_condition", required: true,include_blank: false}) %>
+            <%= text_area_tag "advertisement[description]",@advertisement.description,:placeholder => "Describe",:cols => "40",:rows => "10",:required => true %>
+            <%= text_field_tag "advertisement[kilometers]",@advertisement.kilometers,:placeholder => "Kilometers", :maxlength => "20",:pattern =>"[0-9]*",:required => true  %>
             <% year_arr = [["Year",""]]+((Time.now.year - 25)..(Time.now.year)).to_a.reverse.collect{|aa| [aa,aa]} %>
-            <%= select_tag("advertisement[year]",options_for_select(year_arr,selected: ""),{id: "id_year", required: true,include_blank: false,class: "placeholder"}) %>
+            <%= select_tag("advertisement[year]",options_for_select(year_arr,selected: @advertisement.new_record? ? "" : @advertisement.year),{id: "id_year", required: true,include_blank: false,class: "placeholder"}) %>
             <% condition_arr = [["Condition",""],["Perfect inside and out","Perfect inside and out"],["No accidents, very few faults","No accidents, very few faults"],["A bit of wear & tear, all repaired","A bit of wear & tear, all repaired"],["Normal wear & tear, a few issues","Normal wear & tear, a few issues"],["Lots of wear & tear to the body","Lots of wear & tear to the body"]] %>
-            <%= select_tag("advertisement[condition]",options_for_select(condition_arr,selected: ""),{id: "id_body_condition", required: true,include_blank: false,class: "placeholder"}) %>
-            <%= text_field_tag "advertisement[phone_number]","",:placeholder => "Phone number", :maxlength => "20",:pattern =>"\+?[0-9]*",:id=> "id_phone_number",:required => true  %>
+            <%= select_tag("advertisement[condition]",options_for_select(condition_arr,selected: @advertisement.new_record? ? "" : @advertisement.condition),{id: "id_body_condition", required: true,include_blank: false,class: "placeholder"}) %>
+            <%= text_field_tag "advertisement[phone_number]",@advertisement.phone_number,:placeholder => "Phone number", :maxlength => "20",:pattern =>"\+?[0-9]*",:id=> "id_phone_number",:required => true  %>
             <label for="id_body_type" >
               Body Type:
             </label>
             <% body_type_arr = [["Body Type",""],["Coupe","Coupe"],["Crossover","Crossover"],["Hard Top Convertible","Hard Top Convertible"],["Hatchback","Hatchback"],["Pick Up Truck","Pick Up Truck"],["Sedan","Sedan"],["Soft Top Convertible","Soft Top Convertible"],["Sports Car","Sports Car"],["SUV","SUV"],["Utility Truck","Utility Truck"],["Van","Van"],["Wagon","Wagon"],["Other","Other"]] %>
-            <%= select_tag("advertisement[body_type]",options_for_select(body_type_arr,selected: ""),{id: "id_body_type", required: true,include_blank: false}) %>
+            <%= select_tag("advertisement[body_type]",options_for_select(body_type_arr,selected: @advertisement.new_record? ? "" : @advertisement.body_type),{id: "id_body_type", required: true,include_blank: false}) %>
           </div>
           <div class="required-field">
             <label for="id_color" >
               Color:
             </label>
-            <%= select_tag("advertisement[color]",options_for_select([["Color",""],["Black","Black"],["Blue","Blue"],["Brown","Brown"],["Burgundy","Burgundy"],["Gold","Gold"],["Grey","Grey"],["Orange","Orange"],["Green","Green"],["Purple","Purple"],["Red","Red"],["Silver","Silver"],["Tan","Tan"],["Teal","Teal"],["White","White"],["Yellow","Yellow"],["Other Color","Other Color"]],selected: ""),{id: "id_body_type", required: true,include_blank: false}) %>
+            <%= select_tag("advertisement[color]",options_for_select([["Color",""],["Black","Black"],["Blue","Blue"],["Brown","Brown"],["Burgundy","Burgundy"],["Gold","Gold"],["Grey","Grey"],["Orange","Orange"],["Green","Green"],["Purple","Purple"],["Red","Red"],["Silver","Silver"],["Tan","Tan"],["Teal","Teal"],["White","White"],["Yellow","Yellow"],["Other Color","Other Color"]],selected: @advertisement.new_record? ? "" : @advertisement.color),{id: "id_body_type", required: true,include_blank: false}) %>
           </div>
           <div class="required-field">
             <label for="id_transmission_type" >
               Transmission Type:
             </label>
-            <%= select_tag("advertisement[transition_type]",options_for_select([["Transmission Type",""],["Manual Transmission","Manual Transmission"],["Automatic Transmission","Automatic Transmission"]],selected: ""),{id: "id_transmission_type", required: true,include_blank: false}) %>
+            <%= select_tag("advertisement[transition_type]",options_for_select([["Transmission Type",""],["Manual Transmission","Manual Transmission"],["Automatic Transmission","Automatic Transmission"]],selected: @advertisement.new_record? ? "" : @advertisement.transition_type),{id: "id_transmission_type", required: true,include_blank: false}) %>
           </div>
           <div class="required-field">
             <label for="id_regional_specs" >              
               Regional Specs:
             </label>
-            <%= select_tag("advertisement[regional_specs]",options_for_select([["Regional Specs",""],["European Specs","European Specs"],["GCC Specs","GCC Specs"],["Japanese Specs","Japanese Specs"],["North American Specs","North American Specs"],["Other","Other"]],selected: ""),{id: "id_transmission_type", required: true,include_blank: false}) %>
+            <%= select_tag("advertisement[regional_specs]",options_for_select([["Regional Specs",""],["European Specs","European Specs"],["GCC Specs","GCC Specs"],["Japanese Specs","Japanese Specs"],["North American Specs","North American Specs"],["Other","Other"]],selected: @advertisement.new_record? ? "" : @advertisement.regional_specs),{id: "id_transmission_type", required: true,include_blank: false}) %>
           </div>
           <div class="required-field">
             <label for="id_no._of_cylinders" >
               No. of Cylinders:
             </label>
-            <%= select_tag("advertisement[no_of_cylinders]",options_for_select([["No. of Cylinders",""],["3","3"],["4","4"],["5","5"],["6","6"],["8","8"],["10","10"],["12","12"],["Unknown","Unknown"]],selected: ""),{id: "id_no._of_cylinders", required: true,include_blank: false}) %>
+            <%= select_tag("advertisement[no_of_cylinders]",options_for_select([["No. of Cylinders",""],["3","3"],["4","4"],["5","5"],["6","6"],["8","8"],["10","10"],["12","12"],["Unknown","Unknown"]],selected: @advertisement.new_record? ? "" : @advertisement.no_of_cylinders),{id: "id_no._of_cylinders", required: true,include_blank: false}) %>
           </div>
           <div class="required-field">
             <label for="id_doors" >
               Doors:
             </label>
-            <%= select_tag("advertisement[doors]",options_for_select([["Doors",""],["2 door","2 door"],["3 door","3 door"],["4 door","4 door"],["5+ doors","5+ doors"]],selected: ""),{id: "id_doors", required: true,include_blank: false}) %>
+            <%= select_tag("advertisement[doors]",options_for_select([["Doors",""],["2 door","2 door"],["3 door","3 door"],["4 door","4 door"],["5+ doors","5+ doors"]],selected: @advertisement.new_record? ? "" : @advertisement.doors),{id: "id_doors", required: true,include_blank: false}) %>
           </div>
           <div class="required-field">
             <label for="id_horsepower" >
               Horsepower:
             </label>
-            <%= select_tag("advertisement[horse_power]",options_for_select([["Horsepower",""],["Less than 150 HP","Less than 150 HP"],["150 - 200 HP","150 - 200 HP"],["200 - 300 HP","200 - 300 HP"],["300 - 400 HP","300 - 400 HP"],["400 - 500 HP","400 - 500 HP"],["500 - 600 HP","500 - 600 HP"],["600 - 700 HP"],["700 - 800 HP","700 - 800 HP"],["800 - 900 HP","800 - 900 HP"],["900+ HP","900+ HP"],["Unknown","Unknown"]],selected: ""),{id: "id_horsepower", required: true,include_blank: false}) %>
+            <%= select_tag("advertisement[horse_power]",options_for_select([["Horsepower",""],["Less than 150 HP","Less than 150 HP"],["150 - 200 HP","150 - 200 HP"],["200 - 300 HP","200 - 300 HP"],["300 - 400 HP","300 - 400 HP"],["400 - 500 HP","400 - 500 HP"],["500 - 600 HP","500 - 600 HP"],["600 - 700 HP"],["700 - 800 HP","700 - 800 HP"],["800 - 900 HP","800 - 900 HP"],["900+ HP","900+ HP"],["Unknown","Unknown"]],selected: @advertisement.new_record? ? "" : @advertisement.horse_power),{id: "id_horsepower", required: true,include_blank: false}) %>
           </div>
           <div class="required-field">
             <label for="id_warranty" >
               Warranty:
             </label>
-            <%= select_tag("advertisement[warrenty]",options_for_select([["Warranty",""],["Yes","Yes"],["No","No"],["Does not apply","Does not apply"]],selected: ""),{id: "id_warranty", required: true,include_blank: false}) %>
+            <%= select_tag("advertisement[warrenty]",options_for_select([["Warranty",""],["Yes","Yes"],["No","No"],["Does not apply","Does not apply"]],selected: @advertisement.new_record? ? "" : @advertisement.warrenty),{id: "id_warranty", required: true,include_blank: false}) %>
           </div>
           <div class="required-field">
             <label for="id_fuel_type" >
               Fuel Type:
             </label>
-            <%= select_tag("advertisement[fuel_type]",options_for_select([["Fuel Type",""],["Gasoline","Gasoline"],["Diesel","Diesel"],["Hybrid","Hybrid"],["Electric","Electric"]],selected: ""),{id: "id_fuel_type", required: true,include_blank: false}) %>
+            <%= select_tag("advertisement[fuel_type]",options_for_select([["Fuel Type",""],["Gasoline","Gasoline"],["Diesel","Diesel"],["Hybrid","Hybrid"],["Electric","Electric"]],selected: @advertisement.new_record? ? "" : @advertisement.fuel_type),{id: "id_fuel_type", required: true,include_blank: false}) %>
           </div>
           <div class="extras">
             <label for="id_extras" >
@@ -94,7 +93,12 @@
               <% extra_array.each_with_index do |extra,index| %>
                 <li>
                   <label for="id_extras_<%= index %>">
-                    <%= check_box_tag "advertisement[extras][]","#{extra}",false %><%= extra %>
+                    <% if @advertisement.extras.present? %>
+                      <% extra_flag = @advertisement.extras.split(",").include?(extra) ? true : false %>
+                      <%= check_box_tag "advertisement[extras][]","#{extra}",extra_flag %><%= extra %>
+                    <% else %>
+                      <%= check_box_tag "advertisement[extras][]","#{extra}",false %><%= extra %>
+                    <% end %>  
                   </label>  
                 </li>
               <% end %>
@@ -110,7 +114,12 @@
               <% extra_array.each_with_index do |extra,index| %>
                 <li>
                   <label for="id_technical_features_<%= index %>">
-                    <%= check_box_tag "advertisement[technical_features][]","#{extra}",false %><%= extra %>
+                    <% if @advertisement.technical_features.present? %>
+                      <% flag = @advertisement.technical_features.split(",").include?(extra) ? true : false %>
+                      <%= check_box_tag "advertisement[technical_features][]","#{extra}",flag %><%= extra %>
+                    <% else %>  
+                      <%= check_box_tag "advertisement[technical_features][]","#{extra}",false %><%= extra %>
+                    <% end %>  
                   </label>  
                 </li>
               <% end %>
@@ -140,10 +149,13 @@
             <label for="id_neighbourhood" >
               <h4>   Neighbourhood: </h4>
             </label>
-            <%= select_tag("advertisement[location_id]",options_for_select([["Choose Location",""]] + Location.all.collect{|aa| [aa.name,aa.id]},selected: ""),{id: "id_neighbourhood", required: true,include_blank: false}) %>
-            <%= text_field_tag "advertisement[gps_coordinate]","",:placeholder => "GPS Coordinates", :maxlength => "20",:pattern =>"\+?[0-9]*",:id=> "id_phone_number",:required => true  %>
+            <%= select_tag("advertisement[location_id]",options_for_select([["Choose Location",""]] + Location.all.collect{|aa| [aa.name,aa.id]},selected: @advertisement.new_record? ? "" : @advertisement.location_id),{id: "id_neighbourhood", required: true,include_blank: false}) %>
+            <%= text_field_tag "advertisement[gps_coordinate]",@advertisement.gps_coordinate,:placeholder => "GPS Coordinates", :maxlength => "20",:pattern =>"\+?[0-9]*",:id=> "id_phone_number",:required => true  %>
           </div>
           <%= submit_tag "Submit",:class=> "button button-yalla button-green proxima",:id=> "enter-details-submit" %>
+          <% unless @advertisement.new_record? %>
+            <%= link_to "Delete","/advertisements/#{@advertisement.id}",:method=>:delete,:class=> "button button-yalla button-red proxima",:id=> "enter-details-submit" %>
+          <% end %>
         </div>
         <div id="uploaded-images" style="display: none;">
         </div>
@@ -153,7 +165,6 @@
       <p>&nbsp; </p>
     </fieldset>
   </div>
-<% end %>
 <style type="text/css">
   #alternative_images_ {
     border-left: 2px solid #ee0400;

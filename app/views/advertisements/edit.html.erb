@@ -1,5 +1,23 @@
-<% if params[:type] == "auto-accessories-parts" %>
-  <%= render 'auto_accessories_form', advertisement: @advertisement %>
-<% else %>
-  <%= render 'form', advertisement: @advertisement %>
-<% end %>
+<style type="text/css">
+	fieldset {
+    border: 2px solid #cacaca;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 10px 8px;
+}
+
+ .required-field textarea {
+ 	height: 80px !important;
+ 	width: 95% !important;
+ }
+</style>
+<%= form_tag({:action => :update,:id => @advertisement.id},:method=>:PATCH, :multipart => true) do %>
+  <% if @category.html_view == "0" %>
+    <%= render 'auto_accessories_form', advertisement: @advertisement %>
+  <% elsif @category.html_view == "1" %>
+    <%= render 'used_car_for_sale_form', advertisement: @advertisement %>  
+  <% else %>
+    <%= render 'form', advertisement: @advertisement %>
+  <% end %>
+<% end %>  

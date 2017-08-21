@@ -50,7 +50,7 @@
       <% @advertisements.to_a.in_groups_of(6) do |ad_array| %>
         <div class="Trending__container cf">
           <% ad_array.compact.each do |ad| %>
-            <a href="<%= advertisement_path(ad.id) %>" class="Trending__block">
+            <a href="<%= edit_advertisement_path({id: ad.id}) %>" class="Trending__block">
               <div class="Trending__icon">
                 <% if ad.main_image.present? %>
                   <%= image_tag ad.main_image.avatar.url,:alt => "No Image Available" ,:style => "width: 98%;height: 98%" %>
@@ -58,7 +58,7 @@
                     <span style="margin-left: 23px">No Image Available</span>
                   <% end %>  
               </div>
-              <div class="Trending__tag"><%= ad.title %></div>
+              <div class="Trending__tag">Edit</div>
             </a>
           <% end %>      
         </div>
