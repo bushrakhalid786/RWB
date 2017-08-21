@@ -131,7 +131,11 @@
               <label for="id_photo0" >
                 Main photo:
               </label>
-              <%= file_field_tag "main_image",:style=> "margin-top: 10px" %>
+              <% if @advertisement.main_image.present? %>
+                You cannot edit the main photo. (Delete the ad and create a new one) . You can add more photos to your existing Ad
+              <% else %>
+                <%= file_field_tag "main_image",:style=> "margin-top: 10px" %>
+              <% end %>
             </div>
             <% (0..9).to_a.each do |number| %>
               <div class="" style="margin-top: 10px">

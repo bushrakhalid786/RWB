@@ -15,7 +15,7 @@ class AdvertisementsController < ApplicationController
     @advertisement = Advertisement.where(id: params[:id]).last
     @category = @advertisement.category if @advertisement.present?
     @parent_category = @category.parent if @category.present?
-    @bookmark_present = current_user.bookmarks.where(advertisement_id: @advertisement.id).present?
+    @bookmark_present = current_user.bookmarks.where(advertisement_id: @advertisement.id).present? rescue nil
     @ad_reply = AdReply.new
   end
 
@@ -61,7 +61,7 @@ class AdvertisementsController < ApplicationController
       @advertisement.alternate_images = params[:alternative_images] if params[:alternative_images].present?
     end
     respond_to do |format|
-      if @advertisement.update(advertisement_params)
+      if status
         format.html { redirect_to "/", notice: 'Advertisement was successfully updated.' }
         format.json { render :show, status: :ok, location: @advertisement }
       else
@@ -76,7 +76,7 @@ class AdvertisementsController < ApplicationController
   def destroy
     @advertisement.destroy
     respond_to do |format|
-      format.html { redirect_to advertisements_url, notice: 'Advertisement was successfully destroyed.' }
+      format.html { redirect_to "/", notice: 'Advertisement was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -89,8 +89,8 @@ class AdvertisementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def advertisement_params
-      technical_features = params[:advertisement][:technical_features].join(",")
-      extras = params[:advertisement][:extras].join(",")
+      technical_features = params[:advertisement][:extras].present? ? params[:advertisement][:technical_features].join(",") : nil
+      extras = params[:advertisement][:extras].present? ? params[:advertisement][:extras].join(",") : nil
       p = params.require(:advertisement).permit(:extras, :technical_features,:user_id,:make_id,:location_id,:category_id,:active,:title, :price, :make, :description, :kilometers, :year, :condition, :phone_number, :body_type, :color, :transition_type, :regional_specs, :no_of_cylinders, :doors, :horse_power, :warrenty, :fuel_type, :extras, :technical_features, :locate_your_item, :gps_coordinate)
       p.merge!({:technical_features => technical_features,:extras => extras})
     end

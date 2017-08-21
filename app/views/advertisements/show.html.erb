@@ -18,7 +18,8 @@
               <%= @advertisement.title %>
             </span>
             <%= hidden_field_tag "advertisement_id",@advertisement.id %>
-            <%= hidden_field_tag "user_id",current_user.id %>
+            <%= hidden_field_tag "user_id",current_user.id if current_user.present?%>
+            <% if current_user.present? %>
             <span style="margin-left: 82%;margin-top: 10%">
               <a href="javascript:" onclick="save_as_bookmark()">
                 <span class="add-bookmark-block" style="font-size: 24px; line-height: 1.5em;">
@@ -30,6 +31,7 @@
                 </span>
               </a>
             </span>
+            <% end %>
           </h2>
           <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs" align="center">
             <%# empty_image_loop = 10 - @advertisement.images.count %>
