@@ -75,6 +75,6 @@ class AdvertisementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def advertisement_params
-      extras = params[:advertisement][:extras].present? ? params[:advertisement][:extras].join(",") : nil
+      params.require(:advertisement).permit(:category_id,:active,:title, :price, :make, :description, :kilometers, :year, :condition, :phone_number, :body_type, :color, :transition_type, :regional_specs, :no_of_cylinders, :doors, :horse_power, :warrenty, :fuel_type, :extras, :technical_features, :locate_your_item, :gps_coordinate)
     end
 end
