@@ -1,19 +1,6 @@
 class UsersController < ApplicationController
   before_filter :configure_permitted_parameters, if: :devise_controller?
-  before_action :authenticate_user!, except: :add_bookmark
-
-  def my_profile
-  	@user = current_user
-  	@advertisements = @user.advertisements
-    bookmarks = current_user.bookmarks.pluck("advertisement_id").uniq
-    @bookmark_advertisements = Advertisement.where(id: bookmarks)
-  	render "my_profile"
-  end
-
-  def add_bookmark
-    Bookmark.create(advertisement_id: params[:advertisement_id],user_id: params[:user_id])
-    return false
-  end
+  before_action :authenticate_user!
 
   protected
 

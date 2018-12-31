@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :null_session
+  protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_menu,:set_role
+  before_action :set_menu
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to main_app.new_user_session_path, :alert => exception.message
   end
@@ -9,15 +9,13 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:role_id,:email_confirmation, :first_name, :last_name, :gender, :dob_day, :dob_month, :dob_year, :country_id, :designation, :education, :allow_third_party_emails, :allow_dubizzle_email_updates])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email_confirmation, :first_name, :last_name, :gender, :dob_day, :dob_month, :dob_year, :country_id, :designation, :education, :allow_third_party_emails, :allow_dubizzle_email_updates])
   end
 
   def set_menu
   	@categories = Category.where(parent_id: nil)
-  end
-
-  def set_role 
-    @normal_user_role = Role.where(name: "Normal User").last
+    @motor_category = @categories.where(name: "Motors").last
+    @classified_category = @categories.where(name: "Classifieds").last
   end
   
 end

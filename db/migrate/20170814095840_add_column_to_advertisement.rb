@@ -1,5 +1,0 @@
-class AddColumnToAdvertisement < ActiveRecord::Migration[5.0]
-  def change
-  	add_column :advertisements, :user_id, :integer
-  end
-end

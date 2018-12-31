@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.5.0"
+ruby "2.5.1"
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -10,7 +10,7 @@ end
 gem 'rails', '~> 5.0.2'
 # Use sqlite3 as the database for Active Record
 # Use Puma as the app server
-gem 'puma'#, '~> 3.0'
+gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -37,25 +37,13 @@ gem 'acts_as_tree'
 gem 'paperclip'
 gem 'sunspot_rails'
 gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
-gem 'will_paginate'
-gem 'progress_bar'
-gem "cancancan"
-gem 'net-ssh', '~> 2.9.2.beta'
-gem 'mailcatcher'
+#gem 'will_paginate'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-end
-gem 'figaro'
-group :development do
-  gem 'capistrano'
-  gem 'capistrano3-puma'
-  gem 'capistrano-rails', require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-rvm'
 end
 
 group :development do
@@ -69,6 +57,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+#gem 'pg'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

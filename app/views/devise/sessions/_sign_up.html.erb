@@ -6,21 +6,25 @@
     <h4>Register for Free</h4>
     <p class="note">Note: All fields are mandatory</p>
   </div>
-  <%= f.hidden_field "role_id", :value => @normal_user_role.id if @normal_user_role.present? %>
   <div class="clear"></div>
   <div class="form-row" hint="username@domain.com">
     <label for="id_email">Email Address</label>
     <%= f.email_field :email, autofocus: true,id: "id_email", maxlength: "75", required: true %>
     <div class="clear"></div>
-</div>
+  </div>
+  <div class="form-row" hint="username@domain.com (confirm)">
+    <label for="id_email">Confirm Email</label>
+    <%= f.email_field :email_confirmation, autocomplete: "off",id: "id_email2", maxlength: "75", required: true %>
+    <div class="clear"></div>
+  </div>
   <div class="form-row">
     <label for="id_password1">Password</label>
     <div class="multiple">
       <div class="multiple_password1">
-        <%= f.password_field :password, autocomplete: "off",id: "id_password1", minlength: "7", required: true, placeholder: "Password" %>
+        <%= f.password_field :password, autocomplete: "off",id: "id_password1", minlength: "7", required: true %>
       </div>
       <div class="multiple_password2">
-        <%= f.password_field :password_confirmation, autocomplete: "off", id: "id_password2", required: true, placeholder: "Confirm Password" %>
+        <%= f.password_field :password_confirmation, autocomplete: "off", id: "id_password2", required: true %>
       </div>
     </div>
     <div class="clear"></div>

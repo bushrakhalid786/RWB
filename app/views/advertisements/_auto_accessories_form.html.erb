@@ -1,80 +1,69 @@
-<%= hidden_field_tag "advertisement[category_id]", @category.id if @category.present? %>
-<%= hidden_field_tag "advertisement[active]", false %>
-<%= hidden_field_tag "advertisement[user_id]", current_user.id %> 
-<div id="content-wrapper">
-  <fieldset id="fbsignin-form">
-    <legend>Post your Ad (<%= @category.name %>)</legend>
-    <div id="content-col">
-      <div class="clear"></div>
-      <% if advertisement.errors.any? %>
-        <div id="error_explanation">
-          <h2>
-            <%= pluralize(advertisement.errors.count, "error") %> prohibited this advertisement from being saved:
-          </h2>
-          <ul>
-            <% advertisement.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>        
-      <div id="tab2" class="tab_content active_content">
-        <div class="required-field">
-          <%= text_field_tag "advertisement[title]",@advertisement.title,:placeholder => "Ad Title", :maxlength => "20",:required => true %>
-          <%= text_field_tag "advertisement[price]",@advertisement.price,:placeholder => "Price", :maxlength => "20",:required => true  %>
-          <%= select_tag("advertisement[make_id]",options_for_select([["Make",""]] + Make.pluck("name","id"),selected: @advertisement.new_record? ? "" : @advertisement.make_id),{required: true}) %>
-          <%= text_area_tag "advertisement[description]",@advertisement.description,:placeholder => "Describe",:cols => "40",:rows => "10",:required => true %>
-          <% condition_arr = [["Condition",""],["Perfect inside and out","Perfect inside and out"],["A bit of wear & tear, all repaired","A bit of wear & tear, all repaired"],["Normal wear & tear, a few issues","Normal wear & tear, a few issues"],["Lots of wear & tear to the body","Lots of wear & tear to the body"]] %>
-          <%= select_tag("advertisement[condition]",options_for_select(condition_arr,selected: @advertisement.new_record? ? "" : @advertisement.condition),{id: "id_body_condition", required: true,include_blank: false}) %>
-          <%= text_field_tag "advertisement[phone_number]",@advertisement.phone_number,:placeholder => "Phone number", :maxlength => "20",:pattern =>"\+?[0-9]*",:id=> "id_phone_number",:required => true  %>
-          <%= select_tag("advertisement[warrenty]",options_for_select([["Warranty",""],["Yes","Yes"],["No","No"],["Does not apply","Does not apply"]],selected: @advertisement.new_record? ? "" : @advertisement.warrenty),{id: "id_warranty", required: true,include_blank: false}) %>
-          <div class="photo-uploader-fallback">
-            <h2>Add up to 10 photos</h2>
-            <div class="" style="margin-top: 10px">
-              <label for="id_photo0" >
-                Main photo:
-              </label>
-              <% if @advertisement.main_image.present? %>
-                You cannot edit the main photo. (Delete the ad and create a new one) . You can add more photos to your existing Ad
-              <% else %>
-                <%= file_field_tag "main_image",:style=> "margin-top: 10px" %>
+<%= form_for(advertisement) do |f| %>
+  <%= f.hidden_field "category_id", value: @category.id if @category.present? %>
+  <%= f.hidden_field "active",value: false %> 
+  <div id="content-wrapper">
+    <fieldset id="fbsignin-form">
+      <legend>Post your Ad (<%= @category.name %>)</legend>
+      <div id="content-col">
+        <div class="clear"></div>
+        <% if advertisement.errors.any? %>
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(advertisement.errors.count, "error") %> prohibited this advertisement from being saved:
+            </h2>
+            <ul>
+              <% advertisement.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>        
+        <div id="tab2" class="tab_content active_content">
+          <div class="required-field">
+            <%= f.text_field "title",:placeholder => "Ad Title", :maxlength => "20",:required => true %>
+            <%= f.text_field "price",:placeholder => "Price", :maxlength => "20",:required => true  %>
+            <%= f.select "make",options_for_select([["Make",""],["Honda","Honda"],["Toyota","Toyota"],["BMW","BMW"],["Jeep","Jeep"],["Land Rover","Land Rover"]],selected: "Day") %>
+            <%= f.text_area "description",:placeholder => "Describe",:cols => "40",:rows => "10",:required => true %>
+            <% condition_arr = [["Condition",""],["Perfect inside and out","Perfect inside and out"],["A bit of wear & tear, all repaired","A bit of wear & tear, all repaired"],["Normal wear & tear, a few issues","Normal wear & tear, a few issues"],["Lots of wear & tear to the body","Lots of wear & tear to the body"]] %>
+            <%= f.select("condition",options_for_select(condition_arr,selected: ""),{},id: "id_body_condition", required: true,include_blank: false) %>
+            <%= f.text_field "phone_number",:placeholder => "Phone number", :maxlength => "20",:pattern =>"\+?[0-9]*",:id=> "id_phone_number",:required => true  %>
+            <%= f.select("warrenty",options_for_select([["Warranty",""],["Yes","Yes"],["No","No"],["Does not apply","Does not apply"]],selected: ""),{},id: "id_warranty", required: true,include_blank: false) %>
+            <div class="photo-uploader-fallback">
+              <h2>Add up to 10 photos</h2>
+              <div class="" style="margin-top: 10px">
+                <label for="id_photo0" >
+                  Main photo:
+                </label>
+                <%= f.file_field "main_image",:style=> "margin-top: 10px" %>
+              </div>
+              <% (0..9).to_a.each do |number| %>
+                <div class="" style="margin-top: 10px">
+                  <label for="id_photo1" >
+                    <% if number == 0 %>
+                      Alternative Photo:
+                    <% end %>  
+                  </label>
+                  <%= file_field_tag "advertisement[alternative_images][]",:style=> "margin-top: 10px" %>
+                </div>
               <% end %>
             </div>
-            <% (0..9).to_a.each do |number| %>
-              <div class="" style="margin-top: 10px">
-                <label for="id_photo1" >
-                  <% if number == 0 %>
-                    Alternative Photo:
-                  <% end %>  
-                </label>
-                <%= file_field_tag "alternative_images[]",:style=> "margin-top: 10px" %>
-              </div>
-            <% end %>
-          </div>
-          <div class="required-field">
-            <br>
-            <label for="id_neighbourhood" >
-              <h4>   Neighbourhood: </h4>
-            </label>
-            <%= select_tag("advertisement[location_id]",options_for_select( [["Choose Location",""]] + Location.all.collect{|aa| [aa.name,aa.id]},selected: @advertisement.new_record? ? "" : @advertisement.location_id),{id: "id_neighbourhood", required: true,include_blank: false}) %>
-            <%= text_field_tag "advertisement[gps_coordinate]",@advertisement.gps_coordinate,:placeholder => "GPS Coordinates", :maxlength => "20",:pattern =>"\+?[0-9]*",:id=> "id_phone_number",:required => true  %>
-          </div>
-          <div id="map-wrapper">
-            <%= submit_tag "Submit",:class=> "button button-yalla button-green proxima",:id=> "enter-details-submit" %>
-          </div>
-          <% unless @advertisement.new_record? %>
-            <%= link_to "Delete","/advertisements/#{@advertisement.id}",:method=>:delete,:class=> "button button-yalla button-red proxima",:id=> "enter-details-submit" %>
-          <% end %>
-        </div><!-- end #tab2.tab_content -->
-      </div>
-      <p>
-      </p>
-      <p>&nbsp; </p>
-    </div>  
-  </fieldset>
-</div>
-<style type="text/css">
-  #alternative_images_ {
-    border-left: 2px solid #ee0400;
-  }
-</style>
+            <div class="">
+              <br>
+              <label for="id_neighbourhood" >
+                <h4>   Neighbourhood: </h4>
+              </label>
+              <%= f.select("locate_your_item",options_for_select([["Locate your car",""],["Location 1","Location 1"],["Location 2","Location 2"],["Location 3","Location 3"],["Location 4","Location 4"],["Location 5","Location 5"]],selected: ""),{},id: "id_neighbourhood", required: true,include_blank: false) %>
+              <%= f.text_field "gps_coordinate",:placeholder => "GPS Coordinates", :maxlength => "20",:pattern =>"\+?[0-9]*",:id=> "id_phone_number",:required => true  %>
+            </div>
+            <div id="map-wrapper">
+              <%= f.submit "Submit",:class=> "button button-yalla button-green proxima",:id=> "enter-details-submit" %>
+            </div>
+          </div><!-- end #tab2.tab_content -->
+        </div>
+        <p>
+        </p>
+        <p>&nbsp; </p>
+      </div>  
+    </fieldset>
+  </div>
+<% end %>  
