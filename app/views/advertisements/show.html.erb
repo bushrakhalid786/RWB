@@ -3,27 +3,25 @@
     <div class="required-field">
       <p>Title: <%= @advertisement.title %></p>
       <p>Price: <%= @advertisement.price %></p>
-      <% if @advertisement.category and @advertisement.category.alias_name == "auto_accessories_form" %>
-        <p>Make: <%= @advertisement.make %></p>
-      <% end %>
+      <p>Make: <%= @advertisement.make %></p>
       <p>Description: <%= @advertisement.description %></p>
-      <p>Kilometers: <%= @advertisement.kilometers %></p>
-      <p>Year: <%= @advertisement.year %></p>
+      <% if @advertisement.category and @advertisement.category.alias_name == "user-car-for-sale" %>
+        <p>Kilometers: <%= @advertisement.kilometers %></p>
+        <p>Year: <%= @advertisement.year %></p>
+        <p>Body Type: <%= @advertisement.body_type %></p>
+        <p>Color: <%= @advertisement.color %></p>
+        <p>Transmission Type: <%= @advertisement.transition_type %></p>
+        <p>Regional Specs: <%= @advertisement.regional_specs %></p>
+        <p>No. of Cylinders: <%= @advertisement.no_of_cylinders %></p>
+        <p>Doors: <%= @advertisement.doors %></p>
+        <p>Horsepower: <%= @advertisement.horse_power %></p>
+        <p>Fuel Type: <%= @advertisement.fuel_type %></p>
+        <p>Technical Features: <%= @advertisement.technical_features %></p>
+      <% end %>
       <p>Condition: <%= @advertisement.condition %></p>
       <p>Phone Number: <%= @advertisement.phone_number %></p>
-      <p>Body Type: <%= @advertisement.body_type %></p>
-      <p>Color: <%= @advertisement.color %></p>
-      <p>Transmission Type: <%= @advertisement.transition_type %></p>
-      <p>Regional Specs: <%= @advertisement.regional_specs %></p>
-      <p>No. of Cylinders: <%= @advertisement.no_of_cylinders %></p>
-      <p>Doors: <%= @advertisement.doors %></p>
-      <p>Horsepower: <%= @advertisement.horse_power %></p>
       <p>Warranty: <%= @advertisement.warrenty %></p>
-      <p>Fuel Type: <%= @advertisement.fuel_type %></p>
       <p>Extras: <%= @advertisement.extras %></p>
-      <p>Technical Features: <%= @advertisement.technical_features %></p>
-      <p>Horsepower: <%= @advertisement.horse_power %></p>
-      <p>Warranty: <%= @advertisement.warrenty %></p>
       <p>Main photo:<p>
       </p><%= image_tag (@advertisement.main_image.present? ? @advertisement.main_image.avatar.url : ""),:alt => "No Image" ,:style => "width: 28%" %></p>
       <p>Alternative Images: </p>

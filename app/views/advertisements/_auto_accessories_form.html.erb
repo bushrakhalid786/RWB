@@ -52,7 +52,7 @@
               <label for="id_neighbourhood" >
                 <h4>   Neighbourhood: </h4>
               </label>
-              <%= f.select("locate_your_item",options_for_select([["Locate your car",""],["Location 1","Location 1"],["Location 2","Location 2"],["Location 3","Location 3"],["Location 4","Location 4"],["Location 5","Location 5"]],selected: ""),{},id: "id_neighbourhood", required: true,include_blank: false) %>
+              <%= f.select("locate_your_item",options_for_select([["Select Location",""],["Location 1","Location 1"],["Location 2","Location 2"],["Location 3","Location 3"],["Location 4","Location 4"],["Location 5","Location 5"]],selected: ""),{},id: "id_neighbourhood", required: true,include_blank: false) %>
               <%= f.text_field "gps_coordinate",:placeholder => "GPS Coordinates", :maxlength => "20",:pattern =>"\+?[0-9]*",:id=> "id_phone_number",:required => true  %>
             </div>
             <div id="map-wrapper">
