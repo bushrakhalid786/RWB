@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!, :only => "choose_category"
-#  require 'will_paginate/array'
+  require 'will_paginate/array'
 
   def home
 

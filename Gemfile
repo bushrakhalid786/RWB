@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.5.1"
+ruby "2.4.0"
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -37,7 +37,7 @@ gem 'acts_as_tree'
 gem 'paperclip'
 gem 'sunspot_rails'
 gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
-#gem 'will_paginate'
+gem 'will_paginate'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
