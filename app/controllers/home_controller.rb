@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!, :only => "choose_category"
-  require 'will_paginate/array'
+  # require 'will_paginate/array'
 
   def home
 
@@ -27,10 +27,10 @@ class HomeController < ApplicationController
   def search
     if params[:search].present?
       search_params = params[:search].delete_if{|k,v| v.blank?}
-      advertiments = Advertisement.search do
-                      fulltext(search_params["title"])
-                     end
-      @all_ads = advertiments.results.paginate(page: params[:page],per_page: 1)
+      @all_ads = Advertisement.search do
+                   fulltext(search_params["title"])
+                   paginate :page => params[:page], :per_page => 25
+                 end.results
     end
     render "show_category_page"
   end 
